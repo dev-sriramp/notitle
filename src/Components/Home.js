@@ -2,7 +2,7 @@ import React, {useContext, } from "react";
 import {Navigate, } from "react-router-dom";
 import {AuthContext} from "./Auth";
 import {Auth} from "../config";
-import {  signOut } from "firebase/auth";
+import { signOut } from "firebase/auth";
 
 
 const logOut = () =>{
