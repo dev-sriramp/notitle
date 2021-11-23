@@ -31,7 +31,7 @@ const Home = () =>{
         >
           Learn React
         </a>
-        <button onClick={logOut} >hello </button>
+        <button onClick={logOut} className="button btn-primary">hello </button>
       </header>
     </div>
   );

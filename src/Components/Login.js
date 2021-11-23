@@ -1,8 +1,8 @@
 import React, {useContext, useState} from "react";
 import {Navigate, } from "react-router-dom";
 import {AuthContext} from "./Auth";
-import FormButton, {FormInput, FormHeader, OtherComponents} from "./FormButton";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import FormButton, {FormInput, FormHeader} from "./FormButton";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import {Auth} from "../config";
 
 
@@ -30,8 +30,7 @@ const LogIn = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
       const {email, password} = e.target.elements;
-      alert(password.value);
-      createUserWithEmailAndPassword(Auth,email.value,password.value)
+      signInWithEmailAndPassword(Auth,email.value,password.value)
       .then().catch(error => {
         setpasswordWrong("Check email or password");
       })
@@ -51,7 +50,6 @@ const LogIn = () => {
         <p className="centerText">
         </p>
         <p className="centerTextRed">{passwordWrong}</p>
-        <OtherComponents name="Sign Up" link="Signup" value="Dont have an account"/>
       </div>
     </form>
   </div>);
