@@ -17,7 +17,7 @@ const App = () => {
   return ( <AuthProvider >
     <Router >
     <Routes >
-    <Route exact path = "/" element={<Navigate to="/Home" />} />
+    <Route exact path = "/" element={<Navigate to="/Login" />} />
      <Route exact path = "/Home" element={<Home />} />
      <Route exact path = "/Login" element={<LogIn />} />
     </Routes >

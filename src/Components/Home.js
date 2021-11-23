@@ -1,6 +1,22 @@
-import React from "react";
+import React, {useContext, } from "react";
+import {Navigate, } from "react-router-dom";
+import {AuthContext} from "./Auth";
+import {Auth} from "../config";
+import {  signOut } from "firebase/auth";
 
+
+const logOut = () =>{
+  signOut(Auth).then(() => {
+  // Sign-out successful.
+}).catch((error) => {
+  // An error happened.
+});
+}
 const Home = () =>{
+  const {currentUser} = useContext(AuthContext);
+  if (!currentUser) {
+    return <Navigate to="/LogIn"/>;
+  }
   return(
     <div className="App">
       <header className="App-header">
@@ -15,6 +31,7 @@ const Home = () =>{
         >
           Learn React
         </a>
+        <button onClick={logOut} >hello </button>
       </header>
     </div>
   );
