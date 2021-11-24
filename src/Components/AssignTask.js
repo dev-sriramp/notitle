@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react";
 import {db} from "../config";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc  } from "firebase/firestore";
 
 const AssignTask = (props) =>{
   const [workStation,setWorkStation] = useState([]);
@@ -32,26 +32,38 @@ const handleChange = async(event) =>{
     setSubStation(jsonToArray(docSnap.data()));
     //console.log(subStation);
   }
+  const appendChildData = async(e) =>{
+    e.preventDefault();
+    const {date,workStation,subStation,count,time} = e.target.elements;
+    console.log(date.value,workStation.value,subStation.value,count.value,time.value);
+    await setDoc(doc(db, date.value, date.value+workStation.value+subStation.value), {
+  date:date.value,
+  workstation:workStation.value,
+  substation:subStation.value,
+  count:count.value,
+  time:time.value,
+});
+  }
     return(
         <div>
         <h1>Assign Task</h1>
-        <div>
+        <div><form onSubmit={appendChildData}>
         <div className="mb-4">
             <label>Select Date*</label>
-            <input type="date" className="form-control" placeholder="select date"></input>
+            <input name="date" value={new Date().toISOString().substring(0, 10)} type="date" className="form-control" placeholder="select date"></input>
         </div>
         <div className="mb-4">
             <label>Select Workstation*</label>
-            <select onChange={handleChange} className="form-select" aria-label="Default select example">
+            <select onChange={handleChange} name="workStation" className="form-select" aria-label="Default select example">
                 <option  defaultValue={"choose any workstation"}>choose any workstation </option>
                 {workStation.map((data) => (<option  value={data}>{data}</option>))}
 
             </select>
         </div>
         <div className="mb-4">
-            <label>Select model*</label>
-            <select className="form-select" aria-label="Default select example">
-                <option defaultValue={"choose any model"}>choose any model </option>
+            <label>Select Substation*</label>
+            <select className="form-select" name="subStation" aria-label="Default select example">
+                <option defaultValue={"choose any Substation"}>choose any model </option>
                 {subStation.map((data) => (<option  value={data}>{data}</option>))}
             </select>
         </div>
@@ -59,18 +71,20 @@ const handleChange = async(event) =>{
             <div className="row">
                 <div className="col">
                 <label>Enter Count*</label>
-                 <input type="number" className="form-control" placeholder="planned count"></input>
+                 <input type="number" name="count" className="form-control" placeholder="planned count"></input>
                 </div>
                 <div className="col">
                 <label>Enter Time*</label>
-                 <input type="time" className="form-control" placeholder="planned time"></input>
+                 <input type="time" name="time" className="form-control" placeholder="planned time"></input>
                 </div>
             </div>
 
         </div>
         <div className="mb-4 d-grid gap-2">
-            <button className="btn btn-primary" type="button">Publish</button>
+            <button className="btn btn-primary" type="submit">Publish</button>
+
         </div>
+        </form>
         </div>
         </div>
     )
