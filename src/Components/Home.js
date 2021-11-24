@@ -5,6 +5,7 @@ import {Auth,db} from "../config";
 import { signOut } from "firebase/auth";
 import { collection, getDocs } from "firebase/firestore";
 import exportFromJSON from 'export-from-json'
+import Manage from "./Manage"
 
 
 
@@ -39,7 +40,7 @@ const ExportToExcel = () => {
       var data = doc.data();
       setInfo(arr => [
               ...arr,
-              data
+              data,
             ]);
     });
   }
@@ -69,6 +70,10 @@ const ExportToExcel = () => {
         <button onClick={print} className="button btn-primary">print </button>
 
       </header>
+      {
+        info.map((data)=>(<><h1>{data.unit +" "+ data.value}</h1><Manage  data={data} /></>))
+      }
+
     </div>
   );
 };

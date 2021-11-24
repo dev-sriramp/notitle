@@ -10,7 +10,13 @@ const FormButton = (props) => {
 const FormInput = (props) => {
   return (<div className="row">
     <label>{props.description}</label>
-    <input type={props.type} placeholder={props.placeholder} name={props.name} className={props.className}/>
+  <input type={props.type} placeholder={props.placeholder} name={props.name} className={props.className} defaultValue={props.defaultValue}/>
+  </div>)
+};
+const FormInput1 = (props) => {
+  return (<div >
+    <label>{props.description}</label>
+  <input type={props.type} disabled={props.disabled} placeholder={props.placeholder} name={props.name} className={props.className} defaultValue={props.defaultValue}/>
   </div>)
 };
 const FormHeader = props => (<h2 id="headerTitle">{props.title}</h2>);
@@ -31,5 +37,8 @@ export {
 };
 export {
   OtherComponents
+};
+export {
+  FormInput1
 };
 export default FormButton;
