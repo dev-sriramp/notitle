@@ -6,6 +6,8 @@ import { signOut } from "firebase/auth";
 import { collection, getDocs } from "firebase/firestore";
 import exportFromJSON from 'export-from-json'
 import Manage from "./Manage"
+import AssignTask from "./AssignTask";
+import ViewReports from "./ViewReports";
 
 
 
@@ -54,22 +56,32 @@ const ExportToExcel = () => {
   }
   return(
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <button onClick={logOut} className="button btn-primary">Logout </button>
-        <button onClick={print} className="button btn-primary">print </button>
+      <div className="continer">
+      <nav class="navbar navbar-light bg-light">
+          <div class="container-fluid">
+            <div className="d-flex">
+            <button onClick={logOut} className="btn btn-primary me-3">Logout </button>
+            <button onClick={print} className="btn btn-primary ">print </button>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <div className="continer-fluid">
+      <div class="container">
+          <div class="row">
+            <div class="col-lg-6" >
+              <AssignTask></AssignTask>
+            </div>
+            <div class="col-lg-6">
+              <ViewReports></ViewReports>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      </header>
+        
+
+        
       {
         info.map((data)=>(<><h1>{data.unit +" "+ data.value}</h1><Manage  key = {"book.id"} data={data} /></>))
       }
