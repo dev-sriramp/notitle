@@ -35,8 +35,8 @@ const handleChange = async(event) =>{
   const appendChildData = async(e) =>{
     e.preventDefault();
     const {date,workStation,subStation,count,time} = e.target.elements;
-    console.log(date.value,workStation.value,subStation.value,count.value,time.value);
-    await setDoc(doc(db, date.value, date.value+workStation.value+subStation.value), {
+    //console.log(date.value,workStation.value,subStation.value,count.value,time.value);
+    await setDoc(doc(db, date.value, workStation.value+subStation.value), {
   date:date.value,
   workstation:workStation.value,
   substation:subStation.value,
@@ -50,7 +50,7 @@ const handleChange = async(event) =>{
         <div><form onSubmit={appendChildData}>
         <div className="mb-4">
             <label>Select Date*</label>
-            <input name="date" value={new Date().toISOString().substring(0, 10)} type="date" className="form-control" placeholder="select date"></input>
+            <input name="date" type="date" className="form-control" placeholder="select date"></input>
         </div>
         <div className="mb-4">
             <label>Select Workstation*</label>

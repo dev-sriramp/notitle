@@ -5,7 +5,7 @@ import {Auth,db} from "../config";
 import { signOut } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import exportFromJSON from 'export-from-json'
-import Manage from "./Manage"
+//import Manage from "./Manage"
 import AssignTask from "./AssignTask";
 import ViewReports from "./ViewReports";
 
