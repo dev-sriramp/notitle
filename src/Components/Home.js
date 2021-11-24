@@ -71,7 +71,7 @@ const ExportToExcel = () => {
 
       </header>
       {
-        info.map((data)=>(<><h1>{data.unit +" "+ data.value}</h1><Manage  data={data} /></>))
+        info.map((data)=>(<><h1>{data.unit +" "+ data.value}</h1><Manage  key = {"book.id"} data={data} /></>))
       }
 
     </div>
