@@ -3,7 +3,7 @@ import {Navigate, } from "react-router-dom";
 import {AuthContext} from "./Auth";
 import {Auth,db} from "../config";
 import { signOut } from "firebase/auth";
-import { collection, getDocs } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import exportFromJSON from 'export-from-json'
 import Manage from "./Manage"
 import AssignTask from "./AssignTask";
@@ -37,17 +37,21 @@ const ExportToExcel = () => {
 
 
   const Get =  async () =>{
-    const querySnapshot =  await getDocs(collection(db, "UNIT"));
-    querySnapshot.forEach((doc) => {
-      var data = doc.data();
-      setInfo(arr => [
-              ...arr,
-              data,
-            ]);
-    });
+    const docRef = doc(db, "workstation", "workstation");
+    const docSnap = await getDoc(docRef);
+    // console.log(docSnap.data());
+setInfo(docSnap.data())
+    // querySnapshot.forEach((doc) => {
+    //
+    //   var data = doc.data();
+    //
+    //   setInfo(arr => [
+    //           ...arr,
+    //           data,
+    //         ]);
+    // });
   }
   const print = () =>{
-    console.log(info);
     ExportToExcel();
   }
   const {currentUser} = useContext(AuthContext);
@@ -57,8 +61,8 @@ const ExportToExcel = () => {
   return(
     <div className="App">
       <div className="continer">
-      <nav class="navbar navbar-light bg-light">
-          <div class="container-fluid">
+      <nav className="navbar navbar-light bg-light">
+          <div className="container-fluid">
             <div className="d-flex">
             <button onClick={logOut} className="btn btn-primary me-3">Logout </button>
             <button onClick={print} className="btn btn-primary ">print </button>
@@ -67,24 +71,24 @@ const ExportToExcel = () => {
         </nav>
       </div>
       <div className="continer-fluid">
-      <div class="container">
-          <div class="row">
-            <div class="col-lg-6" >
-              <AssignTask></AssignTask>
+      <div className="container">
+          <div className="row">
+            <div className="col-lg-6" >
+              <AssignTask info={info}></AssignTask>
             </div>
-            <div class="col-lg-6">
+            <div className="col-lg-6">
               <ViewReports></ViewReports>
             </div>
           </div>
         </div>
       </div>
 
-        
 
-        
-      {
+
+
+      {/* {
         info.map((data)=>(<><h1>{data.unit +" "+ data.value}</h1><Manage  key = {"book.id"} data={data} /></>))
-      }
+      } */}
 
     </div>
   );
