@@ -73,10 +73,13 @@ setInfo(docSnap.data())
       <div className="continer-fluid">
       <div className="container">
           <div className="row">
-            <div className="col-lg-6" >
+            <div className="col-md-4 mt-3 " >
               <AssignTask info={info}></AssignTask>
             </div>
-            <div className="col-lg-6">
+            <div className="col-md-1">
+
+            </div>
+            <div className="col-md-7  mt-3 ">
               <ViewReports></ViewReports>
             </div>
           </div>

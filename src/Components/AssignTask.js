@@ -1,7 +1,9 @@
 import React,{useState,useEffect} from "react";
 import {db} from "../config";
 import { doc, getDoc, setDoc  } from "firebase/firestore";
-
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+toast.configure()
 const AssignTask = (props) =>{
   const [workStation,setWorkStation] = useState([]);
   const [subStation,setSubStation] = useState([]);
@@ -42,7 +44,7 @@ const handleChange = async(event) =>{
   substation:subStation.value,
   count:count.value,
   time:time.value,
-});
+});toast.success('Task Assigned successfully');
   }
     return(
         <div>
@@ -82,7 +84,6 @@ const handleChange = async(event) =>{
         </div>
         <div className="mb-4 d-grid gap-2">
             <button className="btn btn-primary" type="submit">Publish</button>
-
         </div>
         </form>
         </div>

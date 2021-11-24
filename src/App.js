@@ -6,7 +6,6 @@ import {
   Route
 } from "react-router-dom";
 
-import './App.css';
 import {
   AuthProvider
 } from "./Components/Auth";
