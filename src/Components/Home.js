@@ -1,8 +1,10 @@
-import React, {useContext, } from "react";
+import React, {useContext,useState , useEffect} from "react";
 import {Navigate, } from "react-router-dom";
 import {AuthContext} from "./Auth";
-import {Auth} from "../config";
+import {Auth,db} from "../config";
 import { signOut } from "firebase/auth";
+import { collection, getDocs } from "firebase/firestore";
+
 
 
 const logOut = () =>{
@@ -13,6 +15,26 @@ const logOut = () =>{
 });
 }
 const Home = () =>{
+  const [info, setInfo] = useState([]);
+  useEffect(() => {
+    Get()
+
+
+ },[]);
+
+  const Get =  async () =>{
+    const querySnapshot =  await getDocs(collection(db, "UNIT"));
+    querySnapshot.forEach((doc) => {
+      var data = doc.data();
+      setInfo(arr => [
+              ...arr,
+              data
+            ]);
+    });
+  }
+  const print = () =>{
+    console.log(info);
+  }
   const {currentUser} = useContext(AuthContext);
   if (!currentUser) {
     return <Navigate to="/LogIn"/>;
@@ -31,7 +53,9 @@ const Home = () =>{
         >
           Learn React
         </a>
-        <button onClick={logOut} className="button btn-primary">hello </button>
+        <button onClick={logOut} className="button btn-primary">Logout </button>
+        <button onClick={print} className="button btn-primary">print </button>
+
       </header>
     </div>
   );
