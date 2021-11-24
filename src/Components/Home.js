@@ -4,7 +4,7 @@ import {AuthContext} from "./Auth";
 import {Auth,db} from "../config";
 import { signOut } from "firebase/auth";
 import { collection, getDocs } from "firebase/firestore";
-import exportFromJSON from 'export-from-json'  
+import exportFromJSON from 'export-from-json'
 
 
 
@@ -17,7 +17,7 @@ const logOut = () =>{
 }
 const Home = () =>{
 
-  
+
 
   const [info, setInfo] = useState([]);
   useEffect(() => {
@@ -26,11 +26,11 @@ const Home = () =>{
 
  },[]);
  const data =  info;
-const fileName = 'download'  
-const exportType = 'xls' 
-const ExportToExcel = () => {  
-  exportFromJSON({ data, fileName, exportType })  
-}  
+const fileName = 'download'
+const exportType = 'xls'
+const ExportToExcel = () => {
+  exportFromJSON({ data, fileName, exportType })
+}
 
 
   const Get =  async () =>{
