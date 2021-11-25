@@ -1,10 +1,68 @@
-import React, { useContext } from "react";
+import React, { useContext, useState,useEffect } from "react";
 import { AuthContext } from "./Auth";
 import { Navigate, } from "react-router-dom";
 import Navbar from "./Navbar";
+import { db } from "../config";
+import { query,orderBy,getDocs,collection } from "firebase/firestore";
+
 
 const ViewReports = () => {
   const { currentUser } = useContext(AuthContext);
+  const [values,setValues] = useState([]);
+  const [info,setInfo] =  useState([]);
+
+  useEffect(() => {
+    getdata();
+    getdata2();
+  }, [])
+
+  const getdata = async () => {
+    const docRef = collection(db, "total");
+    const q = query(docRef,orderBy("date","asc"));
+    const docSnap = await getDocs(q);
+    const res=[];
+    docSnap.docChanges().forEach((element)=>{
+        var data= element.doc.data();
+        res.push(data)
+    })
+    const res1 = [];
+    for (let i = 0; i < res.length; i++) {
+      res1.push(res[i].date.trim());
+    };
+    setValues(res1);
+  }
+
+  const getdata2 = async () => {
+    const res=[];
+    for (let i = 0; i < values.length; i++) {
+      const element = values[i];
+      const docref = collection(db,element);
+      const docsnap = await getDocs(docref);
+      docsnap.docChanges().forEach((element)=>{
+        var data= element.doc.data();
+        res.push(data)
+      })
+    }
+    setInfo(res.reverse());
+    console.log(res)
+  }
+
+  function Datarender(props){
+    function takenumber(num){
+      return num.charAt(num.length-1)
+    }
+    return(
+        <tr>
+          <td>{props.date}</td>
+          <td>{takenumber(props.workstation)}</td>
+          <td>{props.model}</td>
+          <td>{props.count}</td>
+          <td>{props.time}</td>
+          <td>{props.id}</td>
+        </tr>
+    )
+  }
+
   if (!currentUser) {
     return <Navigate to="/LogIn" />;
   }
@@ -33,34 +91,19 @@ const ViewReports = () => {
                   <th scope="col">model</th>
                   <th scope="col">planned count</th>
                   <th scope="col">planned time</th>
-                  <th scope="col">status</th>
+                  <th scope="col">id</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>25-11-2021</td>
-                  <td>1</td>
-                  <td>large</td>
-                  <td>75</td>
-                  <td>3hr</td>
-                  <td><span className="badge bg-warning text-dark">Production Started</span></td>
-                </tr>
-                <tr>
-                  <td>25-11-2021</td>
-                  <td>1</td>
-                  <td>small</td>
-                  <td>200</td>
-                  <td>2hr</td>
-                  <td><span className="badge bg-secondary text-dark">Not Started</span></td>
-                </tr>
-                <tr>
-                  <td>25-11-2021</td>
-                  <td>3</td>
-                  <td>large</td>
-                  <td>100</td>
-                  <td>3hr</td>
-                  <td><span className="badge bg-secondary text-dark">Not Started</span></td>
-                </tr>
+                {info.map((d)=>
+                <Datarender 
+                date={d.date} 
+                workstation={d.workstation}
+                model={d.substation}
+                count={d.count}
+                time={d.time}
+                id={d.id}
+                />)}
               </tbody>
             </table>
           </div>
