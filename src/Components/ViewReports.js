@@ -23,7 +23,11 @@ const ViewReports = () => {
         var data= element.doc.data();
         res.push(data)
     })
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> dcc032037c74afc9fbf15a119a3beb7b27e4fffb
     const res1 = [];
     for (let i = 0; i < res.length; i++) {
       res1.push(res[i].date);
@@ -45,7 +49,11 @@ const ViewReports = () => {
       })
       console.log(res)
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> dcc032037c74afc9fbf15a119a3beb7b27e4fffb
   }
   if (!currentUser) {
     return <Navigate to="/LogIn" />;
