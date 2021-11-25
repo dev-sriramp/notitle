@@ -23,7 +23,7 @@ const ViewReports = () => {
         var data= element.doc.data();
         res.push(data)
     })
-  
+
     const res1 = [];
     for (let i = 0; i < res.length; i++) {
       res1.push(res[i].date);
@@ -45,7 +45,7 @@ const ViewReports = () => {
       })
       console.log(res)
     }
-    
+
   }
   if (!currentUser) {
     return <Navigate to="/LogIn" />;
@@ -67,7 +67,7 @@ const ViewReports = () => {
         </ul>
         <div data-bs-spy="scroll" data-bs-offset="0" tabIndex="0" className="scrollspy-example">
           <div className=" table-responsive border p-3" >
-            <table className="table">
+            <table class="table">
               <thead>
                 <tr>
                   <th scope="col">Date</th>
