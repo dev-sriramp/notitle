@@ -8,12 +8,11 @@ import 'react-toastify/dist/ReactToastify.css';
 toast.configure()
 
 const LogIn = () => {
-  const [email,setemail] = useState('');
-  const [password,setpassword] = useState('');
   const [showpasswordtype, setpasswordtype] = useState("password");
   const handleSubmit = (e) => {
     e.preventDefault();
-      signInWithEmailAndPassword(Auth,email,password)
+    const {email,password} = e.target.elements;
+      signInWithEmailAndPassword(Auth,email.value,password.value)
       .then().catch(error => {
         toast.error("Check email or password");
       })
@@ -29,13 +28,14 @@ const LogIn = () => {
       <div className="continer-sm position-absolute top-50 start-50 translate-middle">
       <div  style={{width: "22rem"}}>
         <h1>Login</h1>
+        <form onSubmit={handleSubmit}>
         <div className="mb-3">
             <label>Email</label>
-            <input value={email} onInput={e => setemail(e.target.value)} name="email" type="email" className="form-control"  placeholder="Enter your email"></input>
+            <input name="email" type="email" className="form-control"  placeholder="Enter your email"></input>
         </div>
         <div className="mb-3">
             <label>Password</label>
-            <input value={password} onInput={e => setpassword(e.target.value)} name="password" type={showpasswordtype} className="form-control" placeholder="Enter your password"></input>
+            <input name="password" type={showpasswordtype} className="form-control" placeholder="Enter your password"></input>
         </div>
         <div className=" mb-1">
         <input type="checkbox" onClick={(e) => {
@@ -46,9 +46,9 @@ const LogIn = () => {
           }
         }}/>Show Password</div>
         <div className="mb-4 d-grid gap-2">
-            <button className="btn btn-primary" title="Log in" type="submit" onClick={handleSubmit}>Log in</button>
+            <button className="btn btn-primary" title="Log in" type="submit">Log in</button>
         </div>
-
+</form>
     </div>
       </div>
   </div>);

@@ -13,7 +13,7 @@ function ViewReports(){
                 <p className="nav-link">Completed Task</p>
             </li>
             </ul>
-            <div data-bs-spy="scroll" data-bs-offset="0" tabindex="0"  class="scrollspy-example">
+            <div data-bs-spy="scroll" data-bs-offset="0" tabIndex="0"  className="scrollspy-example">
             <div className="card" >
             <div className="card-body">
                 <h5 className="card-title">Task #id <span className="badge bg-warning text-dark">Production Started</span></h5>
@@ -69,7 +69,7 @@ function ViewReports(){
             </div>
             </div>
             </div>
-            
+
             </div>
 
         </div>
