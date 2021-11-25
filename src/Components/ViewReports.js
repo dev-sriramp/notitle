@@ -3,13 +3,20 @@ import { AuthContext } from "./Auth";
 import { Navigate, } from "react-router-dom";
 import Navbar from "./Navbar";
 import { db } from "../config";
+<<<<<<< HEAD
 import { query,orderBy,getDocs,collection } from "firebase/firestore";
+=======
+import { getDocs,collection } from "firebase/firestore";
+>>>>>>> dcc032037c74afc9fbf15a119a3beb7b27e4fffb
 
 
 const ViewReports = () => {
   const { currentUser } = useContext(AuthContext);
   const [values,setValues] = useState([]);
+<<<<<<< HEAD
   const [info,setInfo] =  useState([]);
+=======
+>>>>>>> dcc032037c74afc9fbf15a119a3beb7b27e4fffb
 
   useEffect(() => {
     getdata();
@@ -18,16 +25,27 @@ const ViewReports = () => {
 
   const getdata = async () => {
     const docRef = collection(db, "total");
+<<<<<<< HEAD
     const q = query(docRef,orderBy("date","asc"));
     const docSnap = await getDocs(q);
+=======
+    const docSnap = await getDocs(docRef);
+>>>>>>> dcc032037c74afc9fbf15a119a3beb7b27e4fffb
     const res=[];
     docSnap.docChanges().forEach((element)=>{
         var data= element.doc.data();
         res.push(data)
     })
+<<<<<<< HEAD
     const res1 = [];
     for (let i = 0; i < res.length; i++) {
       res1.push(res[i].date.trim());
+=======
+  
+    const res1 = [];
+    for (let i = 0; i < res.length; i++) {
+      res1.push(res[i].date);
+>>>>>>> dcc032037c74afc9fbf15a119a3beb7b27e4fffb
     };
     setValues(res1);
   }
@@ -36,12 +54,20 @@ const ViewReports = () => {
     const res=[];
     for (let i = 0; i < values.length; i++) {
       const element = values[i];
+<<<<<<< HEAD
       const docref = collection(db,element);
       const docsnap = await getDocs(docref);
+=======
+      console.log(element)
+      const docref = collection(db,element);
+      const docsnap = await getDocs(docref);
+      console.log(docsnap);
+>>>>>>> dcc032037c74afc9fbf15a119a3beb7b27e4fffb
       docsnap.docChanges().forEach((element)=>{
         var data= element.doc.data();
         res.push(data)
       })
+<<<<<<< HEAD
     }
     setInfo(res.reverse());
     console.log(res)
@@ -63,6 +89,12 @@ const ViewReports = () => {
     )
   }
 
+=======
+      console.log(res)
+    }
+    
+  }
+>>>>>>> dcc032037c74afc9fbf15a119a3beb7b27e4fffb
   if (!currentUser) {
     return <Navigate to="/LogIn" />;
   }
