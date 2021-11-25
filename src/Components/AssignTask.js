@@ -63,7 +63,7 @@ setCount("");
 setTime("");
   }
     return(
-        <div className="shadow" style={{width: "23rem" , borderRadius:"12px"}}>
+        <div className="shadow" style={{width: "100%" , borderRadius:"12px"}}>
           <center>
             <h2  className="fw-bold">Assign Task</h2>
             </center>

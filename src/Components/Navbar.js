@@ -25,16 +25,20 @@ const Navbar =  (props) => {
     //   }
     return(
         <div>
-            <div className="continer">
+            <div className="topnav">
             <nav className="navbar navbar-light bg-light">
-                <div className="container-fluid">
-                    <div className="d-flex">
+                <div className="ms-1 ">
+                    <div className="">
                     <Link to="/Home"><button className={props.home}>Home</button></Link>
                     <Link to="/Report"><button className={props.report} >ViewReports</button></Link>
-                    <button onClick={logOut} className="btn btn-light me-3">Logout </button>
+                    
+                    
                     {/* <button onClick={print} className="btn btn-primary ">print </button> */}
                     </div>
                 </div>
+                <div class="me">
+                    <button onClick={logOut} className="btn btn-light me-3">Logout </button>
+                    </div>
                 </nav>
             </div>
         </div>
