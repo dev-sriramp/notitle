@@ -1,38 +1,38 @@
-import React,{useState,useEffect} from "react";
-import {db} from "../config";
-import { doc, getDoc, setDoc  } from "firebase/firestore";
-import {toast} from 'react-toastify';
+import React, { useState, useEffect } from "react";
+import { db } from "../config";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 toast.configure()
-const AssignTask = (props) =>{
-  const [workStation,setWorkStation] = useState([]);
-  const [subStation,setSubStation] = useState([]);
+const AssignTask = (props) => {
+  const [workStation, setWorkStation] = useState([]);
+  const [subStation, setSubStation] = useState([]);
 
-  const [productionUnit,setProductionUnit] = useState();
-  const [subUnit,setSubUnit] = useState();
-  const [count,setCount] = useState();
-  const [time,setTime] = useState();
+  const [productionUnit, setProductionUnit] = useState();
+  const [subUnit, setSubUnit] = useState();
+  const [count, setCount] = useState();
+  const [time, setTime] = useState();
   //console.log(props.info)
-  useEffect(()=>{
+  useEffect(() => {
     const objectToArray = obj => {
-   const keys = Object.keys(obj);
-   const res = [];
-   for(let i = 0; i < keys.length; i++){
-      res.push(obj[keys[i]]);
-   };
-   return res;
-};
-try{setWorkStation(objectToArray(props.info));}catch{}
-},[props.info])
-const jsonToArray = (props) =>{
-  const keys = Object.keys(props);
-  const res = [];
-  for(let i = 0; i < keys.length; i++){
-     res.push(props[keys[i]]);
-  };
-  return res;
-}
-const handleChange = async(event) =>{
+      const keys = Object.keys(obj);
+      const res = [];
+      for (let i = 0; i < keys.length; i++) {
+        res.push(obj[keys[i]]);
+      };
+      return res;
+    };
+    try { setWorkStation(objectToArray(props.info)); } catch { }
+  }, [props.info])
+  const jsonToArray = (props) => {
+    const keys = Object.keys(props);
+    const res = [];
+    for (let i = 0; i < keys.length; i++) {
+      res.push(props[keys[i]]);
+    };
+    return res;
+  }
+  const handleChange = async (event) => {
 
     var stationSelected = event.target.value;
     setProductionUnit(stationSelected)
@@ -41,75 +41,75 @@ const handleChange = async(event) =>{
     setSubStation(jsonToArray(docSnap.data()));
     //console.log(subStation);
   }
-  const appendChildData = async(e) =>{
+  const appendChildData = async (e) => {
     e.preventDefault();
     let today = new Date();
     let counter = today.getTime();
     let id = counter += 1;
-    const {date,workStation,subStation,count,time} = e.target.elements;
+    const { date, workStation, subStation, count, time } = e.target.elements;
 
     //console.log(date.value,workStation.value,subStation.value,count.value,time.value);
-    await setDoc(doc(db, date.value, "_"+id), {
-  date:date.value,
-  workstation:workStation.value,
-  substation:subStation.value,
-  count:count.value,
-  time:time.value,
-});toast.success('Task Assigned successfully');
+    await setDoc(doc(db, date.value, "_" + id), {
+      date: date.value,
+      workstation: workStation.value,
+      substation: subStation.value,
+      count: count.value,
+      time: time.value,
+    }); toast.success('Task Assigned successfully');
 
-setProductionUnit("");
-setSubUnit("");
-setCount("");
-setTime("");
+    setProductionUnit("");
+    setSubUnit("");
+    setCount("");
+    setTime("");
   }
-    return(
-        <div className="shadow" style={{width: "23rem" , borderRadius:"12px"}}>
-          <center>
-            <h2  className="fw-bold">Assign Task</h2>
-            </center>
-          <div className="p-3">
+  return (
+    <div className="shadow" style={{ width: "23rem", borderRadius: "12px" }}>
+      <center>
+        <h2 className="fw-bold">Assign Task</h2>
+      </center>
+      <div className="p-3">
         <div><form onSubmit={appendChildData}>
-        <div className="mb-4">
+          <div className="mb-4">
             <label className="mb-1">Select Date*</label>
-          <input name="date"  type="date" className="form-control" placeholder="select date"></input>
-        </div>
-        <div className="mb-4">
+            <input name="date" type="date" className="form-control" placeholder="select date"></input>
+          </div>
+          <div className="mb-4">
             <label className="mb-4">Select Workstation*</label>
-          <select value={productionUnit}  onChange={handleChange} name="workStation" className="form-select" aria-label="Default select example">
-                <option  defaultValue={"choose any workstation"}>choose any workstation </option>
+            <select value={productionUnit} onChange={handleChange} name="workStation" className="form-select" aria-label="Default select example">
+              <option defaultValue={"choose any workstation"}>choose any workstation </option>
               {workStation.map((data) => (<option key={data} value={data}>{data}</option>))}
 
             </select>
-        </div>
-        <div className="mb-4">
+          </div>
+          <div className="mb-4">
             <label>Select Substation*</label>
-          <select className="form-select" value={subUnit} onChange={(e)=>{setSubUnit(e.value)}} name="subStation" aria-label="Default select example">
-                <option defaultValue={"choose any Substation"}>choose any model </option>
-              {subStation.map((data) => (<option key={data}  value={data}>{data}</option>))}
+            <select className="form-select" value={subUnit} onChange={(e) => { setSubUnit(e.value) }} name="subStation" aria-label="Default select example">
+              <option defaultValue={"choose any Substation"}>choose any model </option>
+              {subStation.map((data) => (<option key={data} value={data}>{data}</option>))}
             </select>
-        </div>
-        <div className="mb-4">
+          </div>
+          <div className="mb-4">
             <div className="row">
-                <div className="col">
+              <div className="col">
                 <label className="mb-1">Enter Count*</label>
-              <input type="text"  name="count" value={count} onChange={(e)=>{setCount(e.value)}} className="form-control" placeholder="planned count"></input>
-                </div>
-                <div className="col">
+                <input type="text" name="count" value={count} onChange={(e) => { setCount(e.value) }} className="form-control" placeholder="planned count"></input>
+              </div>
+              <div className="col">
                 <label className="mb-1">Enter Time*</label>
-              <input type="time" value={time} onChange={(e)=>{setTime(e.value)}} name="time" className="form-control" placeholder="planned time"></input>
-                </div>
+                <input type="time" value={time} onChange={(e) => { setTime(e.value) }} name="time" className="form-control" placeholder="planned time"></input>
+              </div>
             </div>
 
-        </div>
-        <div className="mb-2 d-grid gap-2">
+          </div>
+          <div className="mb-2 d-grid gap-2">
             <button className="btn btn-primary" type="submit">Publish</button>
-        </div>
+          </div>
         </form>
         </div>
-          </div>
+      </div>
 
-        </div>
-    )
+    </div>
+  )
 }
 
 export default AssignTask;
