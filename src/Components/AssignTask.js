@@ -41,21 +41,38 @@ const AssignTask = (props) => {
   const appendChildData = async (e) => {
     e.preventDefault();
     let today = new Date();
-    let counter = today.getTime();
-    let id = counter += 1;
+    let counter = today.getTime() +""+ today.getDate() +""+ (today.getMonth()+1) +""+ today.getFullYear();
     const { date, workStation, subStation, count, time } = e.target.elements;
-    await setDoc(doc(db, date.value, "_" + id), {
+    try{
+    await setDoc(doc(db, date.value, "#" + counter), {
       date: date.value,
       workstation: workStation.value,
       substation: subStation.value,
       count: count.value,
       time: time.value,
-    }); toast.success('Task Assigned successfully');
-
+      id:"#" + counter,
+    });
+    //var s = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
+   // await setDoc(doc(db,"total","total-list"),{
+   //   s:s,
+   // })
+    toast.success('Task Assigned successfully');
     setProductionUnit("");
     setSubUnit("");
     setCount("");
     setTime("");
+
+  }
+    catch{
+      toast.error('Error Occurred');
+    }
+
+      let s = today.getFullYear()+"-"+(today.getMonth()+1)+"-"+today.getDate();
+      await setDoc(doc(db, "total", s), {
+        date:s,
+      },{merge:true});
+
+
   }
   return (
     <div className="shadow" style={{ width: "100%", borderRadius: "12px" }}>

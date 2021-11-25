@@ -31,7 +31,7 @@ const Navbar = (props) => {
                             <Link to="/Report"><button className={props.report} >ViewReports</button></Link>
                         </div>
                     </div>
-                    <div class="me">
+                    <div className="me">
                         <button onClick={logOut} className="btn btn-light me-3">Logout </button>
                     </div>
                 </nav>

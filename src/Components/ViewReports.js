@@ -25,7 +25,7 @@ const ViewReports = () => {
         </ul>
         <div data-bs-spy="scroll" data-bs-offset="0" tabIndex="0" className="scrollspy-example">
           <div className=" table-responsive border p-3" >
-            <table class="table">
+            <table className="table">
               <thead>
                 <tr>
                   <th scope="col">Date</th>
