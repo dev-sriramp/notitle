@@ -1,8 +1,10 @@
 import React from "react";
+import Navbar from "./Navbar";
 
-function ViewReports(){
+const  ViewReports = ()=>{
     return(
         <div>
+          <Navbar></Navbar>
             <h1>Reports</h1>
             <div className="border">
             <ul className="nav nav-tabs">

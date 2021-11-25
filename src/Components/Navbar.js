@@ -1,6 +1,7 @@
 import React from "react";
 import {Auth} from "../config";
 import { signOut } from "firebase/auth";
+import {Link} from "react-router-dom";
 
 // function exl(){
 //     const data =  info;
@@ -28,8 +29,8 @@ const Navbar =  () => {
             <nav className="navbar navbar-light bg-light">
                 <div className="container-fluid">
                     <div className="d-flex">
-                    <button className="btn btn-primary me-3">Home</button>
-                    <button className="btn btn-light me-3">ViewReports</button>
+                    <Link to="/Home"><button className="btn btn-primary me-3">Home</button></Link>
+                    <Link to="/Report"><button className="btn btn-light me-3" >ViewReports</button></Link>
                     <button onClick={logOut} className="btn btn-light me-3">Logout </button>
                     {/* <button onClick={print} className="btn btn-primary ">print </button> */}
                     </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import { ScrollView } from "@cantonjs/react-scroll-view";
 
-function ViewReports(){
+const  ViewReports = () =>{
     return(
         <div>
             <div className="shadow" style={{width: "100%" , borderRadius:"12px"}}>
