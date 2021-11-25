@@ -12,7 +12,7 @@ import {Link} from "react-router-dom";
 // }
 // }
 
-const Navbar =  () => {
+const Navbar =  (props) => {
     const logOut = () =>{
         signOut(Auth).then(() => {
         // Sign-out successful.
@@ -29,8 +29,8 @@ const Navbar =  () => {
             <nav className="navbar navbar-light bg-light">
                 <div className="container-fluid">
                     <div className="d-flex">
-                    <Link to="/Home"><button className="btn btn-primary me-3">Home</button></Link>
-                    <Link to="/Report"><button className="btn btn-light me-3" >ViewReports</button></Link>
+                    <Link to="/Home"><button className={props.home}>Home</button></Link>
+                    <Link to="/Report"><button className={props.report} >ViewReports</button></Link>
                     <button onClick={logOut} className="btn btn-light me-3">Logout </button>
                     {/* <button onClick={print} className="btn btn-primary ">print </button> */}
                     </div>

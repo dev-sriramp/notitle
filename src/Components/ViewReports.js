@@ -4,7 +4,7 @@ import Navbar from "./Navbar";
 const  ViewReports = ()=>{
     return(
         <div>
-          <Navbar></Navbar>
+          <Navbar  home={"btn btn-light me-3"} report={"btn btn-primary me-3"}></Navbar>
             <h1>Reports</h1>
             <div className="border">
             <ul className="nav nav-tabs">
