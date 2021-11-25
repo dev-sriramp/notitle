@@ -7,7 +7,7 @@ toast.configure()
 const AssignTask = (props) =>{
   const [workStation,setWorkStation] = useState([]);
   const [subStation,setSubStation] = useState([]);
-  
+
   const [productionUnit,setProductionUnit] = useState();
   const [subUnit,setSubUnit] = useState();
   const [count,setCount] = useState();
@@ -63,15 +63,18 @@ setCount("");
 setTime("");
   }
     return(
-        <div>
-        <h1>Assign Task</h1>
+        <div className="shadow" style={{width: "23rem" , borderRadius:"12px"}}>
+          <center>
+            <h2  className="fw-bold">Assign Task</h2>
+            </center>
+          <div className="p-3">
         <div><form onSubmit={appendChildData}>
         <div className="mb-4">
-            <label>Select Date*</label>
+            <label className="mb-1">Select Date*</label>
           <input name="date"  type="date" className="form-control" placeholder="select date"></input>
         </div>
         <div className="mb-4">
-            <label>Select Workstation*</label>
+            <label className="mb-4">Select Workstation*</label>
           <select value={productionUnit}  onChange={handleChange} name="workStation" className="form-select" aria-label="Default select example">
                 <option  defaultValue={"choose any workstation"}>choose any workstation </option>
               {workStation.map((data) => (<option key={data} value={data}>{data}</option>))}
@@ -88,21 +91,23 @@ setTime("");
         <div className="mb-4">
             <div className="row">
                 <div className="col">
-                <label>Enter Count*</label>
+                <label className="mb-1">Enter Count*</label>
               <input type="text"  name="count" value={count} onChange={(e)=>{setCount(e.value)}} className="form-control" placeholder="planned count"></input>
                 </div>
                 <div className="col">
-                <label>Enter Time*</label>
+                <label className="mb-1">Enter Time*</label>
               <input type="time" value={time} onChange={(e)=>{setTime(e.value)}} name="time" className="form-control" placeholder="planned time"></input>
                 </div>
             </div>
 
         </div>
-        <div className="mb-4 d-grid gap-2">
+        <div className="mb-2 d-grid gap-2">
             <button className="btn btn-primary" type="submit">Publish</button>
         </div>
         </form>
         </div>
+          </div>
+
         </div>
     )
 }
