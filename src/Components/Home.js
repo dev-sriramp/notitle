@@ -5,7 +5,7 @@ import {db} from "../config";
 import { doc, getDoc } from "firebase/firestore";
 //import Manage from "./Manage"
 import AssignTask from "./AssignTask";
-import ViewReports from "./ViewReports";
+import History from "./History";
 import Navbar from "./Navbar";
 // import exportFromJSON from 'export-from-json'
 
@@ -56,7 +56,7 @@ setInfo(docSnap.data())
             </div>
           
             <div className="col-md-8  mt-3 ">
-              <ViewReports></ViewReports>
+              <History></History>
             </div>
           </div>
         </div>
