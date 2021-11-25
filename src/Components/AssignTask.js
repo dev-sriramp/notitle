@@ -47,15 +47,18 @@ const handleChange = async(event) =>{
 });toast.success('Task Assigned successfully');
   }
     return(
-        <div>
-        <h1>Assign Task</h1>
+        <div className="shadow" style={{width: "23rem" , borderRadius:"12px"}}>
+          <center>
+            <h2  className="fw-bold">Assign Task</h2>
+            </center>
+          <div className="p-3">
         <div><form onSubmit={appendChildData}>
         <div className="mb-4">
-            <label>Select Date*</label>
+            <label  className="mb-1">Select Date*</label>
             <input name="date" type="date" className="form-control" placeholder="select date"></input>
         </div>
         <div className="mb-4">
-            <label>Select Workstation*</label>
+            <label  className="mb-1">Select Workstation*</label>
             <select onChange={handleChange} name="workStation" className="form-select" aria-label="Default select example">
                 <option  defaultValue={"choose any workstation"}>choose any workstation </option>
                 {workStation.map((data) => (<option  value={data}>{data}</option>))}
@@ -63,7 +66,7 @@ const handleChange = async(event) =>{
             </select>
         </div>
         <div className="mb-4">
-            <label>Select Substation*</label>
+            <label className="mb-1">Select Substation*</label>
             <select className="form-select" name="subStation" aria-label="Default select example">
                 <option defaultValue={"choose any Substation"}>choose any model </option>
                 {subStation.map((data) => (<option  value={data}>{data}</option>))}
@@ -72,21 +75,23 @@ const handleChange = async(event) =>{
         <div className="mb-4">
             <div className="row">
                 <div className="col">
-                <label>Enter Count*</label>
+                <label  className="mb-1">Enter Count*</label>
                  <input type="number" name="count" className="form-control" placeholder="planned count"></input>
                 </div>
                 <div className="col">
-                <label>Enter Time*</label>
+                <label  className="mb-1">Enter Time*</label>
                  <input type="time" name="time" className="form-control" placeholder="planned time"></input>
                 </div>
             </div>
 
         </div>
-        <div className="mb-4 d-grid gap-2">
+        <div className="mb-2 d-grid gap-2">
             <button className="btn btn-primary" type="submit">Publish</button>
         </div>
         </form>
         </div>
+          </div>
+        
         </div>
     )
 }
