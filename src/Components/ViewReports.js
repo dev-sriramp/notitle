@@ -1,10 +1,52 @@
-import React, { useContext } from "react";
+import React, { useContext, useState,useEffect } from "react";
 import { AuthContext } from "./Auth";
 import { Navigate, } from "react-router-dom";
 import Navbar from "./Navbar";
+import { db } from "../config";
+import { getDocs,collection } from "firebase/firestore";
+
 
 const ViewReports = () => {
   const { currentUser } = useContext(AuthContext);
+  const [values,setValues] = useState([]);
+
+  useEffect(() => {
+    getdata();
+    getdata2();
+  }, [])
+
+  const getdata = async () => {
+    const docRef = collection(db, "total");
+    const docSnap = await getDocs(docRef);
+    const res=[];
+    docSnap.docChanges().forEach((element)=>{
+        var data= element.doc.data();
+        res.push(data)
+    })
+  
+    const res1 = [];
+    for (let i = 0; i < res.length; i++) {
+      res1.push(res[i].date);
+    };
+    setValues(res1);
+  }
+
+  const getdata2 = async () => {
+    const res=[];
+    for (let i = 0; i < values.length; i++) {
+      const element = values[i];
+      console.log(element)
+      const docref = collection(db,element);
+      const docsnap = await getDocs(docref);
+      console.log(docsnap);
+      docsnap.docChanges().forEach((element)=>{
+        var data= element.doc.data();
+        res.push(data)
+      })
+      console.log(res)
+    }
+    
+  }
   if (!currentUser) {
     return <Navigate to="/LogIn" />;
   }
