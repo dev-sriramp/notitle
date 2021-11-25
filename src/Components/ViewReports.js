@@ -1,7 +1,13 @@
-import React from "react";
+import React,{useContext} from "react";
+import {AuthContext} from "./Auth";
+import {Navigate, } from "react-router-dom";
 import Navbar from "./Navbar";
 
 const  ViewReports = ()=>{
+  const {currentUser} = useContext(AuthContext);
+  if (!currentUser) {
+    return <Navigate to="/LogIn"/>;
+  }
     return(
         <div>
           <Navbar  home={"btn btn-light me-3"} report={"btn btn-primary me-3"}></Navbar>
