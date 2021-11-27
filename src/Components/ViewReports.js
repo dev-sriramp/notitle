@@ -76,10 +76,13 @@ const ViewReports = () => {
       <div className="">
         <ul className="nav nav-tabs">
           <li className="nav-item">
-            <p className="nav-link active"> Pending Task</p>
+            <p className="nav-link active">All Task</p>
           </li>
           <li className="nav-item">
-            <p className="nav-link">Completed Task</p>
+            <p className="nav-link"> Pending</p>
+          </li>
+          <li className="nav-item">
+            <p className="nav-link"> Completed</p>
           </li>
         </ul>
         <div data-bs-spy="scroll" data-bs-offset="0" tabIndex="0" className="scrollspy-example">
