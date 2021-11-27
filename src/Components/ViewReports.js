@@ -32,7 +32,7 @@ const ViewReports = () => {
        for (let i = 0; i < res.length; i++) {
          res1.push(res[i].date.trim());
        };
-       console.log(res1);
+       //setValues(res1);
        const res2=[];
        for (let i = 0; i < res1.length; i++) {
          const element = res1[i];
@@ -40,7 +40,6 @@ const ViewReports = () => {
          const docsnap = await getDocs(docref);
          docsnap.docChanges().forEach((element)=>{
            var data= element.doc.data();
-           console.log(data)
            res2.push(data)
          })
        }

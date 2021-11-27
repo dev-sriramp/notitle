@@ -67,9 +67,9 @@ const AssignTask = (props) => {
       toast.error('Error Occurred');
     }
 
-      let s = today.getFullYear()+"-"+(today.getMonth()+1)+"-"+today.getDate();
-      await setDoc(doc(db, "total", s), {
-        date:s,
+      //let s = today.getFullYear()+"-"+(today.getMonth()+1)+"-"+today.getDate();
+      await setDoc(doc(db, "total", date.value), {
+        date:date.value,
       },{merge:true});
 
 
