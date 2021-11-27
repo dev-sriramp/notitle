@@ -3,9 +3,10 @@ import { Navigate, } from "react-router-dom";
 import { AuthContext } from "./Auth";
 import { db } from "../config";
 import { doc, getDoc } from "firebase/firestore";
-import AssignTask from "./AssignTask";
-import History from "./History";
+// import AssignTask from "./AssignTask";
+// import History from "./History";
 import Navbar from "./Navbar";
+import Task from "./task/Task";
 // import exportFromJSON from 'export-from-json'
 const Home = () => {
   const [info, setInfo] = useState([]);
@@ -38,13 +39,13 @@ const Home = () => {
       <Navbar home={"btn btn-primary me-3"} report={"btn btn-light me-3"}>
       </Navbar>
       <div className="continer-fluid">
-        <div className="container">
+        <div className="container-fluid">
           <div className="row">
-            <div className="col-md-4 mt-3 " >
+            {/* <div className="col-md-4 mt-3 " >
               <AssignTask info={info}></AssignTask>
-            </div>
-            <div className="col-md-8  mt-3 ">
-              <History></History>
+            </div> */}
+            <div className="col-md-12  mt-3 ">
+            <Task></Task>
             </div>
           </div>
         </div>

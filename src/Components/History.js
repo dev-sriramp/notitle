@@ -59,7 +59,7 @@ const ViewReports = () => {
                 </center>
                 <div className="border pb-1">
                     <div >
-                        <ScrollView style={{ height: '425px' }}>
+                        <ScrollView style={{ height: '440px' }}>
                           {info.map((props)=>(<History key={props.id} value={props}></History>))}
                         </ScrollView>
                     </div>
