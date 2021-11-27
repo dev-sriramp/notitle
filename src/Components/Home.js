@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { Navigate, } from "react-router-dom";
 import { AuthContext } from "./Auth";
 import { db } from "../config";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, } from "firebase/firestore";
 // import AssignTask from "./AssignTask";
 // import History from "./History";
 import Navbar from "./Navbar";
@@ -17,6 +17,7 @@ const Home = () => {
   const Get = async () => {
     const docRef = doc(db, "workstation", "workstation");
     const docSnap = await getDoc(docRef);
+    //const q = query(docRef,orderBy("date","asc"));
     // console.log(docSnap.data());
     setInfo(docSnap.data())
     // querySnapshot.forEach((doc) => {
@@ -45,7 +46,7 @@ const Home = () => {
               <AssignTask info={info}></AssignTask>
             </div> */}
             <div className="col-md-12  mt-3 ">
-            <Task></Task>
+            <Task info={info}></Task>
             </div>
           </div>
         </div>

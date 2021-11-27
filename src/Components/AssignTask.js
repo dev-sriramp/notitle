@@ -70,7 +70,7 @@ const AssignTask = (props) => {
       //let s = today.getFullYear()+"-"+(today.getMonth()+1)+"-"+today.getDate();
       await setDoc(doc(db, "total", date.value), {
         date:date.value,
-      },{merge:true});
+      });
 
 
   }
