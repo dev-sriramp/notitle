@@ -7,6 +7,7 @@ import AssignTask from "./AssignTask";
 import History from "./History";
 import Navbar from "./Navbar";
 // import exportFromJSON from 'export-from-json'
+
 const Home = () => {
   const [info, setInfo] = useState([]);
   useEffect(() => {
@@ -49,6 +50,11 @@ const Home = () => {
           </div>
         </div>
       </div>
+
+      {/* {
+        info.map((data)=>(<><h1>{data.unit +" "+ data.value}</h1><Manage  key = {"book.id"} data={data} /></>))
+      } */}
+
     </div>
   );
 };

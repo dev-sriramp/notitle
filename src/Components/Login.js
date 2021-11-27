@@ -17,6 +17,10 @@ const LogIn = () => {
         toast.error("Check email or password");
       })
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> b0aae81f7021a3f00de70fecec0178115afe52a4
 
   const { currentUser } = useContext(AuthContext);
   if (currentUser) {
@@ -30,6 +34,7 @@ const LogIn = () => {
             <h2 className="fw-bolder mt-3">Welcomeback</h2>
             <p className="text-muted mb-3" style={{ fontSize: "12px" }}>Enter your credentials to access your account.</p>
           </center>
+<<<<<<< HEAD
 
           <div className="p-3 mt-3"  >
             <div className="mb-3">
@@ -51,6 +56,30 @@ const LogIn = () => {
             <div className="mb-4 d-grid gap-2">
               <button className="btn btn-primary" title="Log in" type="submit">Log in</button>
             </div>
+=======
+
+          <div className="p-3 mt-3"  >
+            <div className="mb-3">
+              <label className="fw-bolder ">Email</label>
+              <input name="email" type="email" className="form-control" placeholder="Enter your email"></input>
+            </div>
+            <div className="mb-3">
+              <label className="fw-bolder ">Password</label>
+              <input name="password" type={showpasswordtype} className="form-control" placeholder="Enter your password"></input>
+            </div>
+            <div className=" mb-1 text-muted">
+              <input type="checkbox" onClick={(e) => {
+                if (showpasswordtype === "password") {
+                  setpasswordtype("text");
+                } else if (showpasswordtype === "text") {
+                  setpasswordtype("password");
+                }
+              }} /> Show Password</div>
+            <div className="mb-4 d-grid gap-2">
+              <button className="btn btn-primary" title="Log in" type="submit">Log in</button>
+            </div>
+
+>>>>>>> b0aae81f7021a3f00de70fecec0178115afe52a4
           </div>
         </div></div></form>
   </div>);

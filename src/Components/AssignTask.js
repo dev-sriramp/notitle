@@ -7,10 +7,12 @@ toast.configure()
 const AssignTask = (props) => {
   const [workStation, setWorkStation] = useState([]);
   const [subStation, setSubStation] = useState([]);
+
   const [productionUnit, setProductionUnit] = useState();
   const [subUnit, setSubUnit] = useState();
   const [count, setCount] = useState();
   const [time, setTime] = useState();
+  //console.log(props.info)
   useEffect(() => {
     const objectToArray = obj => {
       const keys = Object.keys(obj);
