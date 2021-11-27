@@ -8,45 +8,44 @@ import { query,orderBy,getDocs,collection } from "firebase/firestore";
 
 const ViewReports = () => {
   const { currentUser } = useContext(AuthContext);
-  const [values,setValues] = useState([]);
+  //const [values,setValues] = useState([]);
   const [info,setInfo] =  useState([]);
+//  const [first,setFirst] =  useState(true);
+
+  // const getdata = async () => {
+  //
+  // }
 
   useEffect(() => {
-    getdata();
-    getdata2();
-  }, [])
-
-  const getdata = async () => {
-    const docRef = collection(db, "total");
-    const q = query(docRef,orderBy("date","asc"));
-    const docSnap = await getDocs(q);
-    const res=[];
-    docSnap.docChanges().forEach((element)=>{
-        var data= element.doc.data();
-        res.push(data)
-    })
-    const res1 = [];
-    for (let i = 0; i < res.length; i++) {
-      res1.push(res[i].date.trim());
-    };
-    setValues(res1);
-    console.log(res);
-  }
-
-  const getdata2 = async () => {
-    const res=[];
-    for (let i = 0; i < values.length; i++) {
-      const element = values[i];
-      const docref = collection(db,element);
-      const docsnap = await getDocs(docref);
-      docsnap.docChanges().forEach((element)=>{
-        var data= element.doc.data();
-        res.push(data)
+    Get()
+  }, []);
+    const Get = async () => {
+      const docRef = collection(db, "total");
+      const q = query(docRef,orderBy("date","asc"));
+      const docSnap = await getDocs(q);
+      const res=[];
+      docSnap.docChanges().forEach((element)=>{
+          var data= element.doc.data();
+          res.push(data)
       })
+       const res1 = [];
+       for (let i = 0; i < res.length; i++) {
+         res1.push(res[i].date.trim());
+       };
+       //setValues(res1);
+       const res2=[];
+       for (let i = 0; i < res1.length; i++) {
+         const element = res1[i];
+         const docref = collection(db,element);
+         const docsnap = await getDocs(docref);
+         docsnap.docChanges().forEach((element)=>{
+           var data= element.doc.data();
+           res2.push(data)
+         })
+       }
+       setInfo(res2.reverse());
+       console.log(res2)
     }
-    setInfo(res.reverse());
-    console.log(res)
-  }
 
   function Datarender(props){
     function takenumber(num){
@@ -67,6 +66,7 @@ const ViewReports = () => {
   if (!currentUser) {
     return <Navigate to="/LogIn" />;
   }
+
   return (
     <div>
       <Navbar home={"btn btn-light me-3"} report={"btn btn-primary me-3"}></Navbar>
@@ -84,7 +84,7 @@ const ViewReports = () => {
         </ul>
         <div data-bs-spy="scroll" data-bs-offset="0" tabIndex="0" className="scrollspy-example">
           <div className=" table-responsive border p-3" >
-            <table class="table">
+            <table className="table">
               <thead>
                 <tr>
                   <th scope="col">Date</th>
@@ -96,8 +96,9 @@ const ViewReports = () => {
                 </tr>
               </thead>
               <tbody>
-                {info.map((d)=>
+                {info.map(( d)=>
                 <Datarender
+                key={d.id}
                 date={d.date}
                 workstation={d.workstation}
                 model={d.substation}
