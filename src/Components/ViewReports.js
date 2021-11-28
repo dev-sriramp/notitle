@@ -4,6 +4,7 @@ import { Navigate, } from "react-router-dom";
 import Navbar from "./Navbar";
 import { db } from "../config";
 import { query,orderBy,getDocs,collection } from "firebase/firestore";
+import exportFromJSON from 'export-from-json'
 
 
 const ViewReports = () => {
@@ -44,8 +45,17 @@ const ViewReports = () => {
          })
        }
        setInfo(res2.reverse());
-       console.log(res2)
+       //console.log(res2)
     }
+
+const ExportToExcel = () => {
+  let today = new Date();
+  let counter = today.getTime() +""+ today.getDate() +""+ (today.getMonth()+1) +""+ today.getFullYear();
+const data =  info;
+const fileName = counter;
+const exportType = 'xls'
+  exportFromJSON({ data, fileName, exportType })
+}
 
   function Datarender(props){
     function takenumber(num){
@@ -84,6 +94,7 @@ const ViewReports = () => {
           <li className="nav-item">
             <p className="nav-link"> Completed</p>
           </li>
+            <button className="btn pull-right btn-success" onClick={()=>{ExportToExcel()}}> Print Report</button>
         </ul>
         <div data-bs-spy="scroll" data-bs-offset="0" tabIndex="0" className="scrollspy-example">
           <div className=" table-responsive border p-3" >
