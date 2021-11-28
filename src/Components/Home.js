@@ -8,6 +8,7 @@ import { doc, getDoc, } from "firebase/firestore";
 import Navbar from "./Navbar";
 import Task from "./task/Task";
 // import exportFromJSON from 'export-from-json'
+
 const Home = () => {
   const [info, setInfo] = useState([]);
   useEffect(() => {
@@ -51,6 +52,11 @@ const Home = () => {
           </div>
         </div>
       </div>
+
+      {/* {
+        info.map((data)=>(<><h1>{data.unit +" "+ data.value}</h1><Manage  key = {"book.id"} data={data} /></>))
+      } */}
+
     </div>
   );
 };
