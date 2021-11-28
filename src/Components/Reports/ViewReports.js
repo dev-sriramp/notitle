@@ -1,8 +1,8 @@
 import React, { useContext, useState,useEffect } from "react";
-import { AuthContext } from "./Auth";
+import { AuthContext } from "../Login/Auth";
 import { Navigate, } from "react-router-dom";
-import Navbar from "./Navbar";
-import { db } from "../config";
+import Navbar from "../Others/Navbar";
+import { db } from "../../config";
 import { query,orderBy,getDocs,collection } from "firebase/firestore";
 import exportFromJSON from 'export-from-json'
 
@@ -63,12 +63,12 @@ const exportType = 'xls'
     }
     return(
         <tr>
+          <td>{props.id}</td>
           <td>{props.date}</td>
           <td>{takenumber(props.workstation)}</td>
           <td>{props.model}</td>
           <td>{props.count}</td>
           <td>{props.time}</td>
-          <td>{props.id}</td>
         </tr>
     )
   }
@@ -80,9 +80,7 @@ const exportType = 'xls'
   return (
     <div>
       <Navbar home={"btn btn-light me-3"} report={"btn btn-primary me-3"}></Navbar>
-      <center>
-        <h1>Reports</h1>
-      </center>
+      <h2 className="p-3"> Reports</h2>
       <div className="">
         <ul className="nav nav-tabs">
           <li className="nav-item">
@@ -96,29 +94,52 @@ const exportType = 'xls'
           </li>
             <button className="btn pull-right btn-success" onClick={()=>{ExportToExcel()}}> Print Report</button>
         </ul>
-        <div data-bs-spy="scroll" data-bs-offset="0" tabIndex="0" className="scrollspy-example">
-          <div className=" table-responsive border p-3" >
-            <table className="table">
-              <thead>
+        <div data-bs-spy="scroll" data-bs-offset="0" tabIndex="0" className="scrollspy-example border border-white">
+          <div className=" border border-white table-responsive border p-3" >
+            <table className="table ">
+              <thead  className="table">
                 <tr>
-                  <th scope="col">Date</th>
-                  <th scope="col">Workstation</th>
-                  <th scope="col">model</th>
+                <th scope="col">
+                <label class="form-label">id</label>
+                  <input type="number" class="form-control"></input>
+                </th>
+                  <th scope="col">
+                  <label class="form-label">Date</label>
+                  <input type="date" class="form-control"></input>
+                  </th>
+                  <th scope="col">
+                  <label class="form-label">Workstation</label>
+                    <select class="form-select" aria-label="Default select example">
+                      <option selected>All</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                    </select></th>
+                  <th scope="col">
+                  <label class="form-label">Model</label>
+                    <select class="form-select" aria-label="Default select example">
+                    <option selected>All</option>
+                    <option value="1">small</option>
+                    <option value="2">medium</option>
+                    <option value="3">large</option>
+                  </select>
+                  </th>
                   <th scope="col">planned count</th>
                   <th scope="col">planned time</th>
-                  <th scope="col">id</th>
+                  
                 </tr>
               </thead>
               <tbody>
                 {info.map(( d)=>
                 <Datarender
                 key={d.id}
+                id={d.id}
                 date={d.date}
                 workstation={d.workstation}
                 model={d.substation}
                 count={d.count}
                 time={d.time}
-                id={d.id}
+                
                 />)}
               </tbody>
             </table>

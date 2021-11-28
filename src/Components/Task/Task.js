@@ -85,14 +85,14 @@ const Task = (props) => {
   }
     return(
         <div>
+          <h2 className="p-1"> Assign Task</h2>
         <div>
             <div>
-            <h2>Assign Task</h2>
-        <div className="card ">
+        <div className="card  ">
         <div className="card-body">
-        <div className="table-responsive">
-        <table className="table">
-            <thead className="table-dark">
+        <div className="table-responsive ">
+        <table className="table ">
+            <thead className="table">
                 <tr>
                 <th scope="col">No</th>
                 <th scope="col">Date</th>

@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Navigate, } from "react-router-dom";
 import { AuthContext } from "./Auth";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { Auth } from "../config";
+import { Auth } from "../../config";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 toast.configure()
@@ -20,7 +20,7 @@ const LogIn = () => {
 
   const { currentUser } = useContext(AuthContext);
   if (currentUser) {
-    return <Navigate to="/Home" />;
+    return <Navigate to="/Assigntask"/>;
   }
   return (<div>
     <form onSubmit={handleSubmit}>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Auth } from "../config";
+import { Auth } from "../../config";
 import { onAuthStateChanged } from "firebase/auth";
-import Lode from "./loading";
+import Lode from "../Others/loading";
 export const AuthContext = React.createContext();
 export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
