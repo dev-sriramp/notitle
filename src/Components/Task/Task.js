@@ -3,16 +3,12 @@ import Taskinput from "./Taskinput";
 import { db } from "../../config";
 import { doc, setDoc } from "firebase/firestore";
 import { toast } from 'react-toastify';
-
 import 'react-toastify/dist/ReactToastify.css';
 toast.configure()
 
-
 const Task = (props) => {
-
   const [workStation, setWorkStation] = useState([]);
   const [formValues, setFormValues] = useState([{ name: "", email : ""}])
-  //const [field, setField] = useState(1);
   useEffect(() => {
     const objectToArray = obj => {
       const keys = Object.keys(obj);
@@ -46,16 +42,8 @@ const Task = (props) => {
       if(i>0){
         str=6
       }
-      console.log(props[i].value)
-      console.log(props[i+1].value)
-      console.log(props[i+2].value)
-      console.log(props[i+3].value)
-      console.log(props[i+4].value)
-
-
      let today = new Date();
      let counter = today.getTime() +""+ today.getDate() +""+ (today.getMonth()+1) +""+ today.getFullYear();
-  //   const { date, workStation, subStation, count, time } = e.target.elements;
      try{
      await setDoc(doc(db, props[i].value, "#" + counter), {
        date: props[i].value,
@@ -65,34 +53,24 @@ const Task = (props) => {
        time: props[i+4].value,
        id:"#" + counter,
      });
- //     var s = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
- // await setDoc(doc(db,"total","total-list"),{
- //     s:s,
- // })
      toast.success('Task Assigned successfully');
-
   }
      catch{
        toast.error('Error Occurred');
      }
-
-       //let s = today.getFullYear()+"-"+(today.getMonth()+1)+"-"+today.getDate();
        await setDoc(doc(db, "total", props[i].value), {
          date:props[i].value,
-       });
-}
-
-  }
+       });}}
     return(
         <div>
+          <h2 className="p-1"> Assign Task</h2>
         <div>
             <div>
-            <h2>Assign Task</h2>
-        <div className="card ">
+        <div className="card  ">
         <div className="card-body">
-        <div className="table-responsive">
-        <table className="table">
-            <thead className="table-dark">
+        <div className="table-responsive ">
+        <table className="table ">
+            <thead className="table">
                 <tr>
                 <th scope="col">No</th>
                 <th scope="col">Date</th>
@@ -106,12 +84,10 @@ const Task = (props) => {
             </table>
             </div>
         <form onSubmit={appendChildData}>
-
         {formValues.map(( element,index) => (
           <div key={index}>
         <Taskinput value={workStation.sort()} keys={index} DeleteButton={removeFormFields} ></Taskinput>
-        </div>
-))}
+        </div>))}
         <center>
             <button onClick={() => addFormFields()}type="button" className="btn btn-outline-secondary">
             + Add field</button>
@@ -124,14 +100,9 @@ const Task = (props) => {
         </form>
         </div>
         </div>
-
-
             </div>
-           .
          </div>
         </div>
     )
-
 }
-
 export default Task;
