@@ -1,22 +1,23 @@
 import React, { useContext, useState,useEffect } from "react";
-import { AuthContext } from "../Login/Auth";
+import { AuthContext } from "./Auth";
 import { Navigate, } from "react-router-dom";
-import Navbar from "../Others/Navbar";
-import { db } from "../../config";
+import Navbar from "./Navbar";
+import { db } from "../config";
 import { query,orderBy,getDocs,collection } from "firebase/firestore";
 import exportFromJSON from 'export-from-json'
 
 
 const ViewReports = () => {
   const { currentUser } = useContext(AuthContext);
-  //const [values,setValues] = useState([])
- 
+  //const [values,setValues] = useState([]);
+  
   const [info,setInfo] =  useState([]);
-  const [info1,setInfo1] =  useState([]);
 //  const [first,setFirst] =  useState(true);
+
   // const getdata = async () => {
   //
   // }
+
   useEffect(() => {
     Get()
   }, []);
@@ -45,7 +46,6 @@ const ViewReports = () => {
          })
        }
        setInfo(res2.reverse());
-       setInfo1(res2.reverse());
        //console.log(res2)
     }
 
@@ -64,12 +64,12 @@ const exportType = 'xls'
     }
     return(
         <tr>
-          <td>{props.id}</td>
           <td>{props.date}</td>
           <td>{takenumber(props.workstation)}</td>
           <td>{props.model}</td>
           <td>{props.count}</td>
           <td>{props.time}</td>
+          <td>{props.id}</td>
         </tr>
     )
   }
@@ -78,20 +78,12 @@ const exportType = 'xls'
     return <Navigate to="/LogIn" />;
   }
 
-  function searcher(value){
-        const filteredData = info1.filter(item => {
-          return Object.keys(item).some(key =>
-            item[key].includes(value));
-        });
-        setInfo(filteredData);
-
-   }
- 
-
   return (
     <div>
       <Navbar home={"btn btn-light me-3"} report={"btn btn-primary me-3"}></Navbar>
-      <h2 className="p-3"> Reports</h2>
+      <center>
+        <h1>Reports</h1>
+      </center>
       <div className="">
         <ul className="nav nav-tabs">
           <li className="nav-item">
@@ -105,54 +97,30 @@ const exportType = 'xls'
           </li>
             <button className="btn pull-right btn-success" onClick={()=>{ExportToExcel()}}> Print Report</button>
         </ul>
-        <div data-bs-spy="scroll" data-bs-offset="0" tabIndex="0" className="scrollspy-example border border-white">
-          <div className=" border border-white table-responsive border p-3" >
-            <table className="table ">
-              <thead  className="table">
+        <div data-bs-spy="scroll" data-bs-offset="0" tabIndex="0" className="scrollspy-example">
+          <div className=" table-responsive border p-3" >
+            <table className="table">
+              <thead>
                 <tr>
-                <th scope="col">
-                <label class="form-label">id</label>
-                  <input type="number" onChange={text=>searcher(text.target.value)} class="form-control"></input>
-                  </th>
-                  <th scope="col">
-                  <label class="form-label">Date</label>
-                  <input type="date" onChange={text=>searcher(text.target.value)} class="form-control"></input>
-                  </th>
-                  <th scope="col">
-                  <label class="form-label">Workstation</label>
-                    <select class="form-select" onChange={(text)=>searcher(text.target.value)} aria-label="Default select example">
-                      <option value="" selected>All</option>
-                      <option value="workstation1">1</option>
-                      <option value="workstation2">2</option>
-                      <option value="workstation3">3</option>
-                    </select></th>
-                  <th scope="col">
-                  <label class="form-label">Model</label>
-                    <select class="form-select" onChange={(text)=>searcher(text.target.value)} aria-label="Default select example">
-                    <option value="" selected>All</option>
-                    <option value="small">small</option>
-                    <option value="medium">medium</option>
-                    <option value="large">large</option>
-                    <option value="verylarge">verylarge</option>
-                  </select>
-                  </th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Workstation</th>
+                  <th scope="col">model</th>
                   <th scope="col">planned count</th>
                   <th scope="col">planned time</th>
-                  
+                  <th scope="col">id</th>
                 </tr>
               </thead>
               <tbody>
-                {info.map((d)=>(
-                  <Datarender
-                  key={d.id}
-                  id={d.id}
-                  date={d.date}
-                  workstation={d.workstation}
-                  model={d.substation}
-                  count={d.count}
-                  time={d.time}
-                  />
-                ))}
+                {info.map(( d)=>
+                <Datarender
+                key={d.id}
+                date={d.date}
+                workstation={d.workstation}
+                model={d.substation}
+                count={d.count}
+                time={d.time}
+                id={d.id}
+                />)}
               </tbody>
             </table>
           </div>

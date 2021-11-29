@@ -2,7 +2,6 @@ import React from "react";
 import { Auth } from "../../config";
 import { signOut } from "firebase/auth";
 import { Link } from "react-router-dom";
-import 'reactjs-popup/dist/index.css';
 
 // function exl(){
 //     const data =  info;

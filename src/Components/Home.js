@@ -1,15 +1,14 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Navigate, } from "react-router-dom";
-import { AuthContext } from "../Login/Auth";
-import { db } from "../../config";
+import { AuthContext } from "./Auth";
+import { db } from "../config";
 import { doc, getDoc, } from "firebase/firestore";
 // import AssignTask from "./AssignTask";
 // import History from "./History";
-import Navbar from "../Others/Navbar";
-import Task from "./Task";
+import Navbar from "./Navbar";
+import Task from "./task/Task";
 // import exportFromJSON from 'export-from-json'
-
-const Assigntask = () => {
+const Home = () => {
   const [info, setInfo] = useState([]);
   useEffect(() => {
     Get()
@@ -52,12 +51,7 @@ const Assigntask = () => {
           </div>
         </div>
       </div>
-
-      {/* {
-        info.map((data)=>(<><h1>{data.unit +" "+ data.value}</h1><Manage  key = {"book.id"} data={data} /></>))
-      } */}
-
     </div>
   );
 };
-export default Assigntask;
+export default Home;
