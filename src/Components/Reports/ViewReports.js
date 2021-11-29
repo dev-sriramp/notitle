@@ -3,20 +3,17 @@ import { AuthContext } from "../Login/Auth";
 import { Navigate, } from "react-router-dom";
 import Navbar from "../Others/Navbar";
 import { db } from "../../config";
-import { query,orderBy,getDocs,collection } from "firebase/firestore";
+import { query,orderBy,getDocs,collection,doc,getDoc} from "firebase/firestore";
 import exportFromJSON from 'export-from-json'
-
+var DateInfo;
+var WorkStationInfo;
+var WorkStationModelInfo;
 
 const ViewReports = () => {
   const { currentUser } = useContext(AuthContext);
-  //const [values,setValues] = useState([])
- 
   const [info,setInfo] =  useState([]);
   const [info1,setInfo1] =  useState([]);
-//  const [first,setFirst] =  useState(true);
-  // const getdata = async () => {
-  //
-  // }
+  const [workStation, setWorkStation] = useState([]);
   useEffect(() => {
     Get()
   }, []);
@@ -33,7 +30,6 @@ const ViewReports = () => {
        for (let i = 0; i < res.length; i++) {
          res1.push(res[i].date.trim());
        };
-       //setValues(res1);
        const res2=[];
        for (let i = 0; i < res1.length; i++) {
          const element = res1[i];
@@ -45,14 +41,24 @@ const ViewReports = () => {
          })
        }
        setInfo(res2.reverse());
-       setInfo1(res2.reverse());
-       //console.log(res2)
+       setInfo1(res2);
+       const docRefer = doc(db, "workstation", "workstation");
+       const docSnaper = await getDoc(docRefer);
+       let station = docSnaper.data();
+       const objectToArray = obj => {
+         const keys = Object.keys(obj);
+         const res = [];
+         for (let i = 0; i < keys.length; i++) {
+           res.push(obj[keys[i]]);
+         };
+         return res.sort();
+       };
+       try { setWorkStation(objectToArray(station)); } catch { }
     }
-
 const ExportToExcel = () => {
   let today = new Date();
   let counter = today.getTime() +""+ today.getDate() +""+ (today.getMonth()+1) +""+ today.getFullYear();
-const data =  info;
+const data =  info1;
 const fileName = counter;
 const exportType = 'xls'
   exportFromJSON({ data, fileName, exportType })
@@ -78,16 +84,47 @@ const exportType = 'xls'
     return <Navigate to="/LogIn" />;
   }
 
-  function searcher(value){
-        const filteredData = info1.filter(item => {
+  const searcher = () =>{
+    var data = info;
+    if(DateInfo){
+        const filteredData = data.filter(item => {
           return Object.keys(item).some(key =>
-            item[key].includes(value));
+            item[key].includes(DateInfo));
         });
-        setInfo(filteredData);
-
+        data = filteredData;
+      }
+        if(WorkStationInfo ){
+            const filteredData = data.filter(item => {
+              return Object.keys(item).some(key =>
+                item[key].includes(WorkStationInfo));
+            });
+            data = filteredData;}
+            if(WorkStationModelInfo){
+                const filteredData = data.filter(item => {
+                  return Object.keys(item).some(key =>
+                    item[key].includes(WorkStationModelInfo));
+                });
+                data = filteredData;}
+            setInfo1(data)
    }
- 
-
+   const DateSort = (e) =>{
+    DateInfo = e.target.value;
+    searcher()
+   }
+   const WorkStationSort = (e) =>{
+    WorkStationInfo = e.target.value
+    searcher();
+   }
+   const WorkStationModelSort = (e) =>{
+    WorkStationModelInfo = e.target.value
+    searcher();
+   }
+const Reset = () =>{
+  DateInfo = "";
+  WorkStationInfo = "";
+  WorkStationModelInfo = "";
+  setInfo1(info)
+}
   return (
     <div>
       <Navbar home={"btn btn-light me-3"} report={"btn btn-primary me-3"}></Navbar>
@@ -104,6 +141,7 @@ const exportType = 'xls'
             <p className="nav-link"> Completed</p>
           </li>
             <button className="btn pull-right btn-success" onClick={()=>{ExportToExcel()}}> Print Report</button>
+            <button className="btn pull-right btn-danger" onClick={()=>{Reset()}}> Reset</button>
         </ul>
         <div data-bs-spy="scroll" data-bs-offset="0" tabIndex="0" className="scrollspy-example border border-white">
           <div className=" border border-white table-responsive border p-3" >
@@ -111,24 +149,22 @@ const exportType = 'xls'
               <thead  className="table">
                 <tr>
                 <th scope="col">
-                <label class="form-label">id</label>
-                  <input type="number" onChange={text=>searcher(text.target.value)} class="form-control"></input>
+                <label className="form-label">id</label>
+                  <input type="number" className="form-control"></input>
                   </th>
                   <th scope="col">
-                  <label class="form-label">Date</label>
-                  <input type="date" onChange={text=>searcher(text.target.value)} class="form-control"></input>
+                  <label className="form-label">Date</label>
+                  <input type="date" value={DateInfo} onChange={e=>DateSort(e)} className="form-control"></input>
                   </th>
                   <th scope="col">
-                  <label class="form-label">Workstation</label>
-                    <select class="form-select" onChange={(text)=>searcher(text.target.value)} aria-label="Default select example">
+                  <label className="form-label">Workstation</label>
+                    <select className="form-select" value={WorkStationInfo} onChange={(e)=>WorkStationSort(e)} aria-label="Default select example">
                       <option value="" selected>All</option>
-                      <option value="workstation1">1</option>
-                      <option value="workstation2">2</option>
-                      <option value="workstation3">3</option>
+                      {workStation.map((data) => (<option key={data} value={data}>{data}</option>))}
                     </select></th>
                   <th scope="col">
-                  <label class="form-label">Model</label>
-                    <select class="form-select" onChange={(text)=>searcher(text.target.value)} aria-label="Default select example">
+                  <label className="form-label">Model</label>
+                    <select className="form-select" value={WorkStationModelInfo} onChange={(e)=>WorkStationModelSort(e)} aria-label="Default select example">
                     <option value="" selected>All</option>
                     <option value="small">small</option>
                     <option value="medium">medium</option>
@@ -138,11 +174,11 @@ const exportType = 'xls'
                   </th>
                   <th scope="col">planned count</th>
                   <th scope="col">planned time</th>
-                  
+
                 </tr>
               </thead>
               <tbody>
-                {info.map((d)=>(
+                {info1.map((d)=>(
                   <Datarender
                   key={d.id}
                   id={d.id}

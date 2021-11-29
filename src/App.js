@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Navigate, Route } from "react-router-dom";
 import { AuthProvider } from "./Components/Login/Auth";
-import Assigntask from "./Components/task/Assigntask";
+import Assigntask from "./Components/Task/asignTask";
 import LogIn from "./Components/Login/Login";
 import ViewReports from "./Components/Reports/ViewReports"
 import NotFound from "./Components/Others/NotFound"

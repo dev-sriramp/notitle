@@ -1,36 +1,21 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Navigate, } from "react-router-dom";
-import { AuthContext } from "./Auth";
-import { db } from "../config";
+import { AuthContext } from "../Login/Auth";
+import { db } from "../../config";
 import { doc, getDoc, } from "firebase/firestore";
-// import AssignTask from "./AssignTask";
-// import History from "./History";
-import Navbar from "./Navbar";
-import Task from "./task/Task";
-// import exportFromJSON from 'export-from-json'
-const Home = () => {
+import Navbar from "../Others/Navbar";
+import Task from "./Task";
+
+const Assigntask = () => {
   const [info, setInfo] = useState([]);
   useEffect(() => {
     Get()
   }, []);
-
   const Get = async () => {
     const docRef = doc(db, "workstation", "workstation");
     const docSnap = await getDoc(docRef);
-    //const q = query(docRef,orderBy("date","asc"));
-    // console.log(docSnap.data());
-    setInfo(docSnap.data())
-    // querySnapshot.forEach((doc) => {
-    //
-    //   var data = doc.data();
-    //
-    //   setInfo(arr => [
-    //           ...arr,
-    //           data,
-    //         ]);
-    // });
+    setInfo(docSnap.data());
   }
-
   const { currentUser } = useContext(AuthContext);
   if (!currentUser) {
     return <Navigate to="/LogIn" />;
@@ -54,4 +39,4 @@ const Home = () => {
     </div>
   );
 };
-export default Home;
+export default Assigntask;
