@@ -85,27 +85,29 @@ const exportType = 'xls'
   }
 
   const searcher = () =>{
-    var data = info;
-    if(DateInfo){
-        const filteredData = data.filter(item => {
-          return Object.keys(item).some(key =>
-            item[key].includes(DateInfo));
-        });
-        data = filteredData;
+      var data = info;
+      if(DateInfo){
+          const filteredData = data.filter(item => {
+            return Object.keys(item).some(key =>
+              item[key].includes(DateInfo));
+          });
+          data = filteredData;
       }
-        if(WorkStationInfo ){
-            const filteredData = data.filter(item => {
-              return Object.keys(item).some(key =>
-                item[key].includes(WorkStationInfo));
-            });
-            data = filteredData;}
-            if(WorkStationModelInfo){
-                const filteredData = data.filter(item => {
-                  return Object.keys(item).some(key =>
-                    item[key].includes(WorkStationModelInfo));
-                });
-                data = filteredData;}
-            setInfo1(data)
+      if(WorkStationInfo ){
+          const filteredData = data.filter(item => {
+            return Object.keys(item).some(key =>
+              item[key].includes(WorkStationInfo));
+          });
+          data = filteredData;
+      }
+      if(WorkStationModelInfo){
+          const filteredData = data.filter(item => {
+            return Object.keys(item).some(key =>
+              item[key].includes(WorkStationModelInfo));
+          });
+          data = filteredData;
+      }
+      setInfo1(data);
    }
    const DateSort = (e) =>{
     DateInfo = e.target.value;
