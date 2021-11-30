@@ -129,7 +129,7 @@ const Reset = () =>{
 }
   return (
     <div>
-      <Navbar home={"btn btn-light me-3"} report={"btn btn-primary me-3"}></Navbar>
+      <Navbar home={"btn btn-light me-3"} report={"btn btn-primary me-3"} settings={"btn btn-light me-3"} ></Navbar>
       <h2 className="p-3"> Reports</h2>
       <div className="">
         <ul className="nav nav-tabs">
