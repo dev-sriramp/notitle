@@ -22,7 +22,7 @@ const Assigntask = () => {
   }
   return (
     <div className="App">
-      <Navbar home={"btn btn-primary me-3"} report={"btn btn-light me-3"}>
+      <Navbar home={"btn btn-primary me-3"} report={"btn btn-light me-3"} settings={"btn btn-light me-3"}>
       </Navbar>
       <div className="continer-fluid">
         <div className="container-fluid">
