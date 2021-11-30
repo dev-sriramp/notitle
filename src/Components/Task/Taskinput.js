@@ -1,33 +1,27 @@
 import React,{useState} from "react";
 import { db } from "../../config";
-import { doc, getDoc,  } from "firebase/firestore";
+import { getDocs,collection } from "firebase/firestore";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 toast.configure()
 
 const Taskinput = (props) =>{
   const [date, setDate] = useState([]);
-  const [subStation, setSubStation] = useState([]);
+  const [model, setModel] = useState([]);
   const [productionUnit, setProductionUnit] = useState();
   const [subUnit, setSubUnit] = useState();
   const [count, setCount] = useState();
   const [time, setTime] = useState();
-  const jsonToArray = (props) => {
-    const keys = Object.keys(props);
-    const res = [];
-    for (let i = 0; i < keys.length; i++) {
-      res.push(props[keys[i]]);
-    };
-    return res;
-  }
+
   const handleChange = async (event) => {
-    var stationSelected = event.target.value;
-    setProductionUnit(stationSelected)
-    const docRef = doc(db, "workstation", stationSelected);
-    const docSnap = await getDoc(docRef);
-    let s = jsonToArray(docSnap.data());
-    s.sort().reverse();
-    setSubStation(s);
+    const res = [];
+    const querySnapshot = await getDocs(collection(db, event.target.value));
+    setProductionUnit(event.target.value)
+querySnapshot.forEach((doc) => {
+  let s = doc.data();
+  res.push(s.model)
+});
+setModel(res)
   }
     return(
         <div>
@@ -46,9 +40,9 @@ const Taskinput = (props) =>{
                         </select>
                     </td>
                     <td>
-                    <select required className="form-select"  name="subStation" value={subUnit} onChange={(e) => { setSubUnit(e.value) }} aria-label="Default select example">
+                    <select required className="form-select"  name="model" value={subUnit} onChange={(e) => { setSubUnit(e.value) }} aria-label="Default select example">
                             <option disabled >Select Model</option>
-                            {subStation.map((data) => (<option key={data} value={data}>{data}</option>))}
+                            {model.map((data) => (<option key={data} value={data}>{data}</option>))}
                         </select>
                     </td>
                     <td>

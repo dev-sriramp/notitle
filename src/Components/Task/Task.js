@@ -7,19 +7,9 @@ import 'react-toastify/dist/ReactToastify.css';
 toast.configure()
 
 const Task = (props) => {
-  const [workStation, setWorkStation] = useState([]);
   const [formValues, setFormValues] = useState([{ name: "", email : ""}])
   useEffect(() => {
-    const objectToArray = obj => {
-      const keys = Object.keys(obj);
-      const res = [];
-      for (let i = 0; i < keys.length; i++) {
-        res.push(obj[keys[i]]);
-      };
-      return res;
-    };
-    try { setWorkStation(objectToArray(props.info)); } catch { }
-  }, [props.info])
+console.log(props.info)  })
 
   let addFormFields = () => {
 
@@ -86,7 +76,7 @@ const Task = (props) => {
         <form onSubmit={appendChildData}>
         {formValues.map(( element,index) => (
           <div key={index}>
-        <Taskinput value={workStation.sort()} keys={index} DeleteButton={removeFormFields} ></Taskinput>
+        <Taskinput value={props.info.sort()} keys={index} DeleteButton={removeFormFields} ></Taskinput>
         </div>))}
         <center>
             <button onClick={() => addFormFields()}type="button" className="btn btn-outline-secondary">

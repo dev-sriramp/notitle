@@ -3,7 +3,7 @@ import { AuthContext } from "../Login/Auth";
 import { Navigate, } from "react-router-dom";
 import Navbar from "../Others/Navbar";
 import { db } from "../../config";
-import { query,orderBy,getDocs,collection,doc,getDoc} from "firebase/firestore";
+import { query,orderBy,getDocs,collection,} from "firebase/firestore";
 import exportFromJSON from 'export-from-json'
 var DateInfo;
 var WorkStationInfo;
@@ -42,18 +42,13 @@ const ViewReports = () => {
        }
        setInfo(res2.reverse());
        setInfo1(res2);
-       const docRefer = doc(db, "workstation", "workstation");
-       const docSnaper = await getDoc(docRefer);
-       let station = docSnaper.data();
-       const objectToArray = obj => {
-         const keys = Object.keys(obj);
-         const res = [];
-         for (let i = 0; i < keys.length; i++) {
-           res.push(obj[keys[i]]);
-         };
-         return res.sort();
-       };
-       try { setWorkStation(objectToArray(station)); } catch { }
+       const ws = [];
+       const querySnapshot = await getDocs(collection(db, "workstation"));
+   querySnapshot.forEach((doc) => {
+     let s = doc.data();
+     ws.push(s.workstation)
+   });
+   setWorkStation(ws);
     }
 const ExportToExcel = () => {
   let today = new Date();

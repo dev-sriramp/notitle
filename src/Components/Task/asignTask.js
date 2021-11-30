@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { Navigate, } from "react-router-dom";
 import { AuthContext } from "../Login/Auth";
 import { db } from "../../config";
-import { doc, getDoc, } from "firebase/firestore";
+import { getDocs,collection } from "firebase/firestore";
 import Navbar from "../Others/Navbar";
 import Task from "./Task";
 
@@ -12,9 +12,14 @@ const Assigntask = () => {
     Get()
   }, []);
   const Get = async () => {
-    const docRef = doc(db, "workstation", "workstation");
-    const docSnap = await getDoc(docRef);
-    setInfo(docSnap.data());
+    const res = [];
+    const querySnapshot = await getDocs(collection(db, "workstation"));
+querySnapshot.forEach((doc) => {
+  // doc.data() is never undefined for query doc snapshots
+  let s = doc.data();
+  res.push(s.workstation)
+});
+setInfo(res);
   }
   const { currentUser } = useContext(AuthContext);
   if (!currentUser) {
@@ -22,7 +27,7 @@ const Assigntask = () => {
   }
   return (
     <div className="App">
-      <Navbar home={"btn btn-primary me-3"} report={"btn btn-light me-3"} settings={"btn btn-light me-3"}>
+      <Navbar home={"btn btn-primary me-3"} report={"btn btn-light me-3"} settings={"btn btn-light me-3"} >
       </Navbar>
       <div className="continer-fluid">
         <div className="container-fluid">
