@@ -3,7 +3,7 @@ import { AuthContext } from "../Login/Auth";
 import { Navigate, } from "react-router-dom";
 import Navbar from "../Others/Navbar";
 import { db } from "../../config";
-import { query,orderBy,getDocs,collection,doc,getDoc} from "firebase/firestore";
+import { query,orderBy,getDocs,collection,} from "firebase/firestore";
 import exportFromJSON from 'export-from-json'
 var DateInfo;
 var WorkStationInfo;
@@ -42,18 +42,13 @@ const ViewReports = () => {
        }
        setInfo(res2.reverse());
        setInfo1(res2);
-       const docRefer = doc(db, "workstation", "workstation");
-       const docSnaper = await getDoc(docRefer);
-       let station = docSnaper.data();
-       const objectToArray = obj => {
-         const keys = Object.keys(obj);
-         const res = [];
-         for (let i = 0; i < keys.length; i++) {
-           res.push(obj[keys[i]]);
-         };
-         return res.sort();
-       };
-       try { setWorkStation(objectToArray(station)); } catch { }
+       const ws = [];
+       const querySnapshot = await getDocs(collection(db, "workstation"));
+   querySnapshot.forEach((doc) => {
+     let s = doc.data();
+     ws.push(s.workstation)
+   });
+   setWorkStation(ws);
     }
 const ExportToExcel = () => {
   let today = new Date();
@@ -85,27 +80,29 @@ const exportType = 'xls'
   }
 
   const searcher = () =>{
-    var data = info;
-    if(DateInfo){
-        const filteredData = data.filter(item => {
-          return Object.keys(item).some(key =>
-            item[key].includes(DateInfo));
-        });
-        data = filteredData;
+      var data = info;
+      if(DateInfo){
+          const filteredData = data.filter(item => {
+            return Object.keys(item).some(key =>
+              item[key].includes(DateInfo));
+          });
+          data = filteredData;
       }
-        if(WorkStationInfo ){
-            const filteredData = data.filter(item => {
-              return Object.keys(item).some(key =>
-                item[key].includes(WorkStationInfo));
-            });
-            data = filteredData;}
-            if(WorkStationModelInfo){
-                const filteredData = data.filter(item => {
-                  return Object.keys(item).some(key =>
-                    item[key].includes(WorkStationModelInfo));
-                });
-                data = filteredData;}
-            setInfo1(data)
+      if(WorkStationInfo ){
+          const filteredData = data.filter(item => {
+            return Object.keys(item).some(key =>
+              item[key].includes(WorkStationInfo));
+          });
+          data = filteredData;
+      }
+      if(WorkStationModelInfo){
+          const filteredData = data.filter(item => {
+            return Object.keys(item).some(key =>
+              item[key].includes(WorkStationModelInfo));
+          });
+          data = filteredData;
+      }
+      setInfo1(data);
    }
    const DateSort = (e) =>{
     DateInfo = e.target.value;
