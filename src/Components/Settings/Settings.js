@@ -24,7 +24,6 @@ const Settings = () =>{
     const res = [];
     const querySnapshot = await getDocs(collection(db, "workstation"));
 querySnapshot.forEach((doc) => {
-  // doc.data() is never undefined for query doc snapshots
   let s = doc.data();
   res.push(s.workstation)
 });
@@ -43,10 +42,14 @@ setInfo(res);
     e.preventDefault();
      let today = new Date();
      let counter = today.getTime() +""+ today.getDate() +""+ (today.getMonth()+1) +""+ today.getFullYear();
+     if(addWorkStation in info){alert("workStation already Exists")}else{
      try{
      await setDoc(doc(db, "workstation", "#" + counter), {
        workstation: addWorkStation,
      });
+     const res = info
+     res.push(addWorkStation);
+     setInfo(res);
      setAddWorkStation("");
      toast.success('Workstation Added successfully');
   }
@@ -54,7 +57,7 @@ setInfo(res);
        setAddWorkStation("");
        toast.error('Error Occurred');
      }
-   }
+   }}
    const appendModel = async (e) =>{
      console.log(workStation);
      console.log(model);
@@ -68,7 +71,7 @@ setInfo(res);
       });
       setModel("");
       setWorkStation("");
-      toast.success('Workstation Added successfully');
+      toast.success('Model Added successfully');
    }
       catch{
         setModel("");
