@@ -27,11 +27,8 @@ console.log(props.info)  })
     const props = e.target.elements;
     console.log(props)
     var len = props.length-2;
-    var str = 5;
-    for(let i=0;i<len-1;i=i+str){
-      if(i>0){
-        str=6
-      }
+
+    for(let i=0;i<len-1;i=i+6){
      let today = new Date();
      let counter = today.getTime() +""+ today.getDate() +""+ (today.getMonth()+1) +""+ today.getFullYear();
      try{
@@ -59,8 +56,9 @@ console.log(props.info)  })
         <div className="card  ">
         <div className="card-body">
         <div className="table-responsive ">
+        <form onSubmit={appendChildData}>
         <table className="table ">
-            <thead className="table">
+            <thead className="table table-dark">
                 <tr>
                 <th scope="col">No</th>
                 <th scope="col">Date</th>
@@ -71,13 +69,17 @@ console.log(props.info)  })
                 <th scope="col"> </th>
                 </tr>
             </thead>
-            </table>
-            </div>
-        <form onSubmit={appendChildData}>
+              <tbody>
+
+
+
         {formValues.map(( element,index) => (
-          <div key={index}>
+
         <Taskinput value={props.info.sort()} keys={index} DeleteButton={removeFormFields} ></Taskinput>
-        </div>))}
+        ))}
+
+</tbody>
+        </table>
         <center>
             <button onClick={() => addFormFields()}type="button" className="btn btn-outline-secondary">
             + Add field</button>
@@ -88,6 +90,7 @@ console.log(props.info)  })
           </div>
         </center>
         </form>
+        </div>
         </div>
         </div>
             </div>
