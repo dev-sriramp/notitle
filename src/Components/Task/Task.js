@@ -10,24 +10,21 @@ const Task = (props) => {
   const [formValues, setFormValues] = useState([{ name: "", email : ""}])
   useEffect(() => {
 console.log(props.info)  })
-
   let addFormFields = () => {
 
         setFormValues([...formValues, { name: "", email: "" }])
       }
-
     let removeFormFields = (i) => {
              let newFormValues = [...formValues];
              newFormValues.splice(i, 1);
              setFormValues(newFormValues)
          }
-
+         
   const appendChildData = async (e) => {
     e.preventDefault();
     const props = e.target.elements;
     console.log(props)
     var len = props.length-2;
-
     for(let i=0;i<len-1;i=i+6){
      let today = new Date();
      let counter = today.getTime() +""+ today.getDate() +""+ (today.getMonth()+1) +""+ today.getFullYear();
@@ -47,7 +44,9 @@ console.log(props.info)  })
      }
        await setDoc(doc(db, "total", props[i].value), {
          date:props[i].value,
-       });}}
+       });}
+e.target.reset();
+     }
     return(
         <div>
           <h2 className="p-1"> Assign Task</h2>
@@ -56,7 +55,7 @@ console.log(props.info)  })
         <div className="card  ">
         <div className="card-body">
         <div className="table-responsive ">
-        <form onSubmit={appendChildData}>
+        <form onSubmit={appendChildData} >
         <table className="table ">
             <thead className="table table-dark">
                 <tr>
@@ -70,14 +69,9 @@ console.log(props.info)  })
                 </tr>
             </thead>
               <tbody>
-
-
-
         {formValues.map(( element,index) => (
-
         <Taskinput value={props.info.sort()} keys={index} DeleteButton={removeFormFields} ></Taskinput>
         ))}
-
 </tbody>
         </table>
         <center>

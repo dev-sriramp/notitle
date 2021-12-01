@@ -13,27 +13,34 @@ const Taskinput = (props) =>{
   const [count, setCount] = useState();
   const [time, setTime] = useState();
 
-  const handleChange = async (event) => {
+  const handleChange = async (e) => {
     const res = [];
-    const querySnapshot = await getDocs(collection(db, event.target.value));
-    setProductionUnit(event.target.value)
+    var s = e.target.value;
+    setProductionUnit(s);
+    const querySnapshot = await getDocs(collection(db, s));
 querySnapshot.forEach((doc) => {
   let s = doc.data();
   res.push(s.model)
 });
 setModel(res)
   }
+
+  const Value = ()=>{
+    setDate("");
+    model("");
+    setProductionUnit("");
+    setSubUnit("");
+    setCount("");
+    setTime("");
+  }
     return(
-
-
-
                     <tr>
                     <th scope="row">{props.keys+1}</th>
                     <td>
                     <input type="date" required name="date" value={date} onChange={(e) => { setDate(e.value) }} className="form-control" id="exampleFormControlInput1" placeholder="count"></input>
                     </td>
                     <td>
-                    <select required className="form-select" name="workStation" value={productionUnit} onChange={handleChange} aria-label="Default select example">
+                    <select required className="form-select" name="workStation" value={productionUnit} onChange={(e)=>{handleChange(e)}} aria-label="Default select example">
                             <option disabled selected>Select workstartion</option>
                             {props.value.map((data) => (<option key={data} value={data}>{data}</option>))}
                         </select>
@@ -65,8 +72,6 @@ setModel(res)
               }
                     </td>
                     </tr>
-
-
     )
 }
 export default Taskinput;
