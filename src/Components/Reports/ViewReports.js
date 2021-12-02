@@ -4,6 +4,8 @@ import { Navigate, } from "react-router-dom";
 import Navbar from "../Others/Navbar";
 import { db } from "../../config";
 import { query,orderBy,getDocs,collection,} from "firebase/firestore";
+import {ReactComponent as Downloadsvg} from '../../assets/download.svg';
+import {ReactComponent as Resetsvg} from '../../assets/restart.svg';
 import exportFromJSON from 'export-from-json'
 var DateInfo;
 var WorkStationInfo;
@@ -125,7 +127,8 @@ const Reset = () =>{
   return (
     <div>
       <Navbar home={"btn btn-light me-3"} report={"btn btn-primary me-3"} settings={"btn btn-light me-3"} ></Navbar>
-      <h2 className="p-3"> Reports</h2>
+      <h2 className="ps-1 pt-1"> Reports</h2>
+      <p className="ps-1 text-muted">You can filter the reports and download it.</p>
       <div className="">
         <ul className="nav nav-tabs">
           <li className="nav-item">
@@ -137,9 +140,13 @@ const Reset = () =>{
           <li className="nav-item">
             <p className="nav-link"> Completed</p>
           </li>
-            <button className="btn pull-right btn-success" onClick={()=>{ExportToExcel()}}> Print Report</button>
-            <button className="btn pull-right btn-danger" onClick={()=>{Reset()}}> Reset</button>
-        </ul>
+          <li class="nav-item">
+        <p className="btn btn-white" onClick={()=>{Reset()}}> <Resetsvg></Resetsvg> Reset</p>
+        </li>
+        <li class="nav-item">
+        <p className="btn btn-white" onClick={()=>{ExportToExcel()}}><Downloadsvg></Downloadsvg> Download Report</p>
+        </li>
+          </ul>  
         <div data-bs-spy="scroll" data-bs-offset="0" tabIndex="0" className="scrollspy-example border border-white">
           <div className=" border border-white table-responsive border p-3" >
             <table className="table ">
