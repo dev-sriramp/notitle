@@ -6,9 +6,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import {ReactComponent as Deletesvg} from '../../assets/delete.svg';
 toast.configure();
 
-const reset = (e)=>{
-this.Value()
-}
 
 const Taskinput = (props) =>{
   const [date, setDate] = useState([]);
@@ -30,16 +27,8 @@ querySnapshot.forEach((doc) => {
 setModel(res)
   }
 
-  const Value = ()=>{
-     setDate("");
-   model("");
-    setProductionUnit("");
-    setSubUnit("");
-   setCount("");
-    setTime("");
-   }
     return(
-                    <tr>
+                    <tr key={props.keys}>
                     <th scope="row">{props.keys+1}</th>
                     <td>
                     <input type="date" required name="date" value={date} onChange={(e) => { setDate(e.value) }} className="form-control" id="exampleFormControlInput1" placeholder="count"></input>
@@ -76,4 +65,3 @@ setModel(res)
     )
 }
 export default Taskinput;
-export {reset};

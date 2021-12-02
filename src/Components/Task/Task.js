@@ -1,19 +1,17 @@
-import React,{useEffect,useState} from "react";
+import React,{useState} from "react";
 import Taskinput from "./Taskinput";
 import { db } from "../../config";
 import { doc, setDoc } from "firebase/firestore";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {reset} from "./Taskinput";
+
 toast.configure()
 
 const Task = (props) => {
-  const [formValues, setFormValues] = useState([{ name: "", email : ""}])
-  useEffect(() => {
-console.log(props.info)  })
+  const [formValues, setFormValues] = useState([{ name: ""}])
   let addFormFields = () => {
 
-        setFormValues([...formValues, { name: "", email: "" }])
+        setFormValues([...formValues, { name: "" }])
       }
     let removeFormFields = (i) => {
              let newFormValues = [...formValues];
@@ -46,7 +44,7 @@ console.log(props.info)  })
        await setDoc(doc(db, "total", props[i].value), {
          date:props[i].value,
        });}
-reset();
+
      }
     return(
         <div>
