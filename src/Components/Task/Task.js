@@ -49,14 +49,15 @@ e.target.reset();
      }
     return(
         <div>
-          <h2 className="p-1"> Assign Task</h2>
+          <h2 className="pt-1 ps-1"> Assign Task</h2>
+          <p className="ps-1 text-muted">You can add multiple fields and publish them in  single click.</p>
         <div>
             <div>
-        <div className="card  ">
+        <div className="card border ">
         <div className="card-body">
         <div className="table-responsive ">
         <form onSubmit={appendChildData} >
-        <table className="table ">
+        <table className="table table-bordered ">
             <thead className="table table-dark">
                 <tr>
                 <th scope="col">No</th>

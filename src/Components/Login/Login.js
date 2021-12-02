@@ -13,7 +13,9 @@ const LogIn = () => {
     e.preventDefault();
     const { email, password } = e.target.elements;
     signInWithEmailAndPassword(Auth, email.value, password.value)
-      .then().catch(error => {
+      .then(() => {
+        toast.success("Logged in successfully");
+    }).catch(error => {
         toast.error("Check email or password");
       })
   }
