@@ -4,7 +4,8 @@ import { getDocs,collection } from "firebase/firestore";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {ReactComponent as Deletesvg} from '../../assets/delete.svg';
-toast.configure()
+toast.configure();
+
 const reset = (e)=>{
 this.Value()
 }
@@ -29,14 +30,14 @@ querySnapshot.forEach((doc) => {
 setModel(res)
   }
 
-  // const Value = ()=>{
-  //   setDate("");
-  //   model("");
-  //   setProductionUnit("");
-  //   setSubUnit("");
-  //   setCount("");
-  //   setTime("");
-  // }
+  const Value = ()=>{
+     setDate("");
+   model("");
+    setProductionUnit("");
+    setSubUnit("");
+   setCount("");
+    setTime("");
+   }
     return(
                     <tr>
                     <th scope="row">{props.keys+1}</th>
