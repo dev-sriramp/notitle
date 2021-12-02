@@ -4,6 +4,7 @@ import { db } from "../../config";
 import { doc, setDoc } from "firebase/firestore";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {reset} from "./Taskinput";
 toast.configure()
 
 const Task = (props) => {
@@ -19,7 +20,7 @@ console.log(props.info)  })
              newFormValues.splice(i, 1);
              setFormValues(newFormValues)
          }
-         
+
   const appendChildData = async (e) => {
     e.preventDefault();
     const props = e.target.elements;
@@ -45,7 +46,7 @@ console.log(props.info)  })
        await setDoc(doc(db, "total", props[i].value), {
          date:props[i].value,
        });}
-e.target.reset();
+reset();
      }
     return(
         <div>

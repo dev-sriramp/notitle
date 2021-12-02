@@ -4,6 +4,9 @@ import { getDocs,collection } from "firebase/firestore";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 toast.configure()
+const reset = (e)=>{
+this.Value()
+}
 
 const Taskinput = (props) =>{
   const [date, setDate] = useState([]);
@@ -75,3 +78,4 @@ setModel(res)
     )
 }
 export default Taskinput;
+export {reset};
