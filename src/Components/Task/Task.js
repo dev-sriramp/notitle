@@ -8,16 +8,27 @@ import 'react-toastify/dist/ReactToastify.css';
 toast.configure()
 
 const Task = (props) => {
-  const [formValues, setFormValues] = useState([{ name: ""}])
+  const [formValues, setFormValues] = useState([{ date: "",workstation:""}])
   let addFormFields = () => {
 
-        setFormValues([...formValues, { name: "" }])
+        setFormValues([...formValues, { date: "",workstation:"" }])
       }
     let removeFormFields = (i) => {
+            console.log(i);
+            console.log("before",formValues);
              let newFormValues = [...formValues];
              newFormValues.splice(i, 1);
+             console.log("after",newFormValues);
              setFormValues(newFormValues)
          }
+
+         let handleChange = (i, e) => {
+          let newFormValues = [...formValues];
+          console.log(e.target.name+"--"+i);
+          newFormValues[i][e.target.name] = e.target.value;
+          setFormValues(newFormValues);
+          console.log(newFormValues);
+        }
 
   const appendChildData = async (e) => {
     e.preventDefault();
@@ -51,7 +62,7 @@ const Task = (props) => {
           <h2 className="pt-1 ps-1"> Assign Task</h2>
           <p className="ps-1 text-muted">You can add multiple fields and publish them in  single click.</p>
         <div>
-            <div>
+        <div>
         <div className="card border ">
         <div className="card-body">
         <div className="table-responsive ">
@@ -70,7 +81,7 @@ const Task = (props) => {
             </thead>
               <tbody>
         {formValues.map(( element,index) => (
-        <Taskinput value={props.info.sort()} keys={index} DeleteButton={removeFormFields} ></Taskinput>
+        <Taskinput value={props.info.sort()} keys={index} DeleteButton={removeFormFields} updatefield={handleChange}></Taskinput>
         ))}
 </tbody>
         </table>

@@ -31,7 +31,9 @@ setModel(res)
                     <tr key={props.keys}>
                     <th scope="row">{props.keys+1}</th>
                     <td>
-                    <input type="date" required name="date" value={date} onChange={(e) => { setDate(e.value) }} className="form-control" id="exampleFormControlInput1" placeholder="count"></input>
+                    <input type="date" required name="date" value={date} onChange={(e) => { setDate(e.value) 
+                    props.updatefield(props.keys,e);
+                    }} className="form-control" id="exampleFormControlInput1" placeholder="count"></input>
                     </td>
                     <td>
                     <select required className="form-select" name="workStation" value={productionUnit} onChange={(e)=>{handleChange(e)}} aria-label="Default select example">
@@ -53,12 +55,12 @@ setModel(res)
                     </td>
                     <td>
                     {
-                props.keys?
-                <button type="button" className="btn btn-white" onClick={(e)=>{props.DeleteButton(props.keys)}}>
-                <Deletesvg></Deletesvg>
-                </button> : <button type="button" disabled className="btn btn-White" onClick={(e)=>{props.DeleteButton(props.keys)}}>
-                <Deletesvg></Deletesvg>
-                </button>
+                      props.keys?
+                      <button type="button" className="btn btn-white" onClick={(e)=>{props.DeleteButton(props.keys)}}>
+                      <Deletesvg></Deletesvg>
+                      </button> : <button type="button" disabled className="btn btn-White" onClick={(e)=>{props.DeleteButton(props.keys)}}>
+                     <Deletesvg></Deletesvg>
+                      </button>
               }
                     </td>
                     </tr>
