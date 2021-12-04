@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Taskinput from "./Taskinput";
 import { db } from "../../config";
-import { getDocs, collection } from "firebase/firestore";
+import { setDoc,doc,getDocs, collection } from "firebase/firestore";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -29,7 +29,6 @@ const Task = (props) => {
       newFormValues[i]["modelProp"] = res;
     }
     setFormValues(newFormValues);
-    console.log(formValues)
   }
 
   let addFormFields = () => {
@@ -66,8 +65,10 @@ const Task = (props) => {
      }
        await setDoc(doc(db, "total", formValues[i].date), {
          date:formValues[i].date,
-       });}}
-      }
+       });}
+setFormValues([{ date: "", workStation: "", model: "", count: "", timeTaken: "" ,modelProp:[]}])
+     }
+
   return (
     <div>
       <h2 className="pt-1 ps-1"> Assign Task</h2>

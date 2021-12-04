@@ -15,13 +15,13 @@ const Taskinput = (props) =>{
         </td>
         <td>
           <select required className="form-select" name="workStation" value={props.element.workStation || ""} onChange={e => props.handleChange(props.index, e)} aria-label="Default select example" >
-            <option defaultValue="" >Select workstartion</option>
+            <option value={undefined} >Select workstartion</option>
             {props.info.sort().map((data) => (<option key={data} value={data}>{data}</option>))}
           </select>
         </td>
         <td>
           <select required className="form-select" name="model" value={props.element.model || ""} aria-label="Default select example" onChange={e => props.handleChange(props.index, e)} >
-            <option  defaultValue="">Select Model</option>
+            <option value={undefined}>Select Model</option>
             {props.element.modelProp.map((data) => (<option key={data} value={data}>{data}</option>))}
           </select>
         </td>
