@@ -9,6 +9,7 @@ toast.configure()
 
 const Task = (props) => {
 
+
   const [formValues, setFormValues] = useState([{ date: "", workStation: "", model: "", count: "", timeTaken: "" ,modelProp:[]}])
 
   let handleChange = async (i, e) => {
@@ -41,11 +42,32 @@ const Task = (props) => {
     setFormValues(newFormValues)
   }
 
-  let handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(JSON.stringify(formValues));
-  }
+  let handleSubmit = async(e) => {
+    e.preventDefault();
+    let len = formValues.length;
+    for(let i=0;i<len;i++){
+      console.log(formValues[i]);
 
+     let today = new Date();
+     let counter = today.getTime() +""+ today.getDate() +""+ (today.getMonth()+1) +""+ today.getFullYear();
+     try{
+     await setDoc(doc(db, formValues[i].date, "#" + counter), {
+       date: formValues[i].date,
+       workstation: formValues[i].workStation,
+       substation: formValues[i].model,
+       count: formValues[i].count,
+       time: formValues[i].timeTaken,
+       id:"#" + counter,
+     });
+     toast.success('Task Assigned successfully');
+  }
+     catch{
+       toast.error('Error Occurred');
+     }
+       await setDoc(doc(db, "total", formValues[i].date), {
+         date:formValues[i].date,
+       });}}
+      }
   return (
     <div>
       <h2 className="pt-1 ps-1"> Assign Task</h2>
