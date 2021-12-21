@@ -7,6 +7,7 @@ import { signOut } from "firebase/auth";
 import Navbar from "../Others/Navbar";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { WORK_STATION,WORK_STATION_MODEL } from "../../constants/constants";
 
 import {ReactComponent as Accountsvg} from '../../assets/manage_account.svg';
 
@@ -93,16 +94,16 @@ setInfo(res);
                 <div className="card mb-3  ">
                 <div className="card-body">
                 <h6 className="mb-3">
-                 Workstation Settings</h6>
+                 {WORK_STATION} Settings</h6>
                     <div className="d-grid gap-2 mb-3">
-                    <button className="btn btn-outline-primary" type="button"  data-bs-toggle="modal" data-bs-target="#Workstationwindow">Add Workstation</button>
-                        <button className="btn btn-primary" type="button"  data-bs-toggle="modal" data-bs-target="#" >Edit Workstation</button>
+                    <button className="btn btn-outline-primary" type="button"  data-bs-toggle="modal" data-bs-target="#Workstationwindow">Add {WORK_STATION}</button>
+                        <button className="btn btn-primary" type="button"  data-bs-toggle="modal" data-bs-target="#" >Edit {WORK_STATION}</button>
                     </div>
                     <div className="modal fade" id="Workstationwindow" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                         <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title" id="WorkstationwindowLable">Add Workstation</h5>
+                            <h5 className="modal-title" id="WorkstationwindowLable">Add {WORK_STATION}</h5>
                         </div>
                         <div className="modal-body">
                         <div className="mb-3">
@@ -123,20 +124,20 @@ setInfo(res);
                 <div class="col-md-4">
                 <div className="card mb-3">
                 <div className="card-body">
-                <h6 className="mb-3">  Model Settings</h6>
+                <h6 className="mb-3">  {WORK_STATION_MODEL} Settings</h6>
                     <div className="d-grid gap-2 mb-3">
-                    <button className="btn btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#Modelwindow">Add Model </button>
-                        <button className="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#" >Edit Model </button>
+                    <button className="btn btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#Modelwindow">Add {WORK_STATION_MODEL} </button>
+                        <button className="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#" >Edit {WORK_STATION_MODEL}l </button>
                     </div>
                     <div className="modal fade" id="Modelwindow" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                         <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title" id="ModelwindowLable">Add Model</h5>
+                            <h5 className="modal-title" id="ModelwindowLable">Add {WORK_STATION_MODEL}</h5>
                         </div>
                         <div className="modal-body">
                         <div className="mb-3">
-                        <label  className="form-label">Select workstation</label>
+                        <label  className="form-label">Select {WORK_STATION}</label>
                             <select className="form-select" value={workStation} onChange={(e)=>{setWorkStation(e.target.value)}} aria-label="Default select example">
                                 <option selected>Select workstartion</option>
                                 {info.sort().map((data) => (<option key={data} value={data}>{data}</option>))}
@@ -144,7 +145,7 @@ setInfo(res);
                         </div>
 
                             <div className="mb-3">
-                                <label className="form-label">Model Name</label>
+                                <label className="form-label">{WORK_STATION_MODEL} Name</label>
                                 <input type="Name" value={model} onChange={(e)=>{setModel(e.target.value)}} className="form-control"placeholder="Name"></input>
                             </div>
                         </div>
