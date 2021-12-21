@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import {ReactComponent as Settingssvg} from '../../assets/settings.svg';
 import {ReactComponent as Tasksvg} from '../../assets/add_task.svg';
 import {ReactComponent as Repotssvg} from '../../assets/repots.svg';
+import APP_NAME from "../../constants/constants";
 
 const Navbar = (props) => {
     return (
@@ -12,7 +13,7 @@ const Navbar = (props) => {
                     <div className="ms-1 ">
                         <div className="">
                         <button    className="btn btn-light me-3">
-                       <span className="badge bg-warning text-dark" >V-Guard </span>
+                       <span className="badge bg-warning text-dark" >{APP_NAME}</span>
                         </button>
                         </div>
                     </div>

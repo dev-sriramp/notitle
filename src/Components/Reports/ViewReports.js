@@ -7,6 +7,8 @@ import { query,orderBy,getDocs,collection,} from "firebase/firestore";
 import {ReactComponent as Downloadsvg} from '../../assets/download.svg';
 import {ReactComponent as Resetsvg} from '../../assets/restart.svg';
 import exportFromJSON from 'export-from-json'
+import { DATE,WORK_STATION,WORK_STATION_MODEL,TOTAL_COUNT,TOTAL_TIME} from "../../constants/constants";
+
 var DateInfo;
 var WorkStationInfo;
 var WorkStationModelInfo;
@@ -157,17 +159,17 @@ const Reset = () =>{
                   <input type="number" className="form-control"></input>
                   </th>
                   <th scope="col">
-                  <label className="form-label">Date</label>
+                  <label className="form-label">{DATE}</label>
                   <input type="date" value={DateInfo} onChange={e=>DateSort(e)} className="form-control"></input>
                   </th>
                   <th scope="col">
-                  <label className="form-label">Workstation</label>
+                  <label className="form-label">{WORK_STATION}</label>
                     <select className="form-select" value={WorkStationInfo} onChange={(e)=>WorkStationSort(e)} aria-label="Default select example">
                       <option value="" selected>All</option>
                       {workStation.map((data) => (<option key={data} value={data}>{data}</option>))}
                     </select></th>
                   <th scope="col">
-                  <label className="form-label">Model</label>
+                  <label className="form-label">{WORK_STATION_MODEL}</label>
                     <select className="form-select" value={WorkStationModelInfo} onChange={(e)=>WorkStationModelSort(e)} aria-label="Default select example">
                     <option value="" selected>All</option>
                     <option value="small">small</option>
@@ -176,8 +178,8 @@ const Reset = () =>{
                     <option value="verylarge">verylarge</option>
                   </select>
                   </th>
-                  <th scope="col">planned count</th>
-                  <th scope="col">planned time</th>
+                  <th scope="col">{TOTAL_COUNT}</th>
+                  <th scope="col">{TOTAL_TIME}</th>
 
                 </tr>
               </thead>

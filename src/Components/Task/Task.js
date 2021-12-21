@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import Taskinput from "./Taskinput";
 import { db } from "../../config";
-import { setDoc,doc,getDocs, collection } from "firebase/firestore";
+import { setDoc, doc, getDocs, collection } from "firebase/firestore";
 import { toast } from 'react-toastify';
+import { DATE, WORK_STATION, WORK_STATION_MODEL, TOTAL_COUNT, TOTAL_TIME } from "../../constants/constants";
 import 'react-toastify/dist/ReactToastify.css';
 
 toast.configure()
@@ -10,7 +11,7 @@ toast.configure()
 const Task = (props) => {
 
 
-  const [formValues, setFormValues] = useState([{ date: "", workStation: "", model: "", count: "", timeTaken: "" ,modelProp:[]}])
+  const [formValues, setFormValues] = useState([{ date: "", workStation: "", model: "", count: "", timeTaken: "", modelProp: [] }])
 
   let handleChange = async (i, e) => {
     const res = [];
@@ -32,7 +33,7 @@ const Task = (props) => {
   }
 
   let addFormFields = () => {
-    setFormValues([...formValues, { date: "", workStation: "", model: "", count: "", timeTaken: "" ,modelProp:[]}])
+    setFormValues([...formValues, { date: "", workStation: "", model: "", count: "", timeTaken: "", modelProp: [] }])
   }
 
   let removeFormFields = (i) => {
@@ -41,33 +42,34 @@ const Task = (props) => {
     setFormValues(newFormValues)
   }
 
-  let handleSubmit = async(e) => {
+  let handleSubmit = async (e) => {
     e.preventDefault();
     let len = formValues.length;
-    for(let i=0;i<len;i++){
+    for (let i = 0; i < len; i++) {
       console.log(formValues[i]);
 
-     let today = new Date();
-     let counter = today.getTime() +""+ today.getDate() +""+ (today.getMonth()+1) +""+ today.getFullYear();
-     try{
-     await setDoc(doc(db, formValues[i].date, "#" + counter), {
-       date: formValues[i].date,
-       workstation: formValues[i].workStation,
-       substation: formValues[i].model,
-       count: formValues[i].count,
-       time: formValues[i].timeTaken,
-       id:"#" + counter,
-     });
-     toast.success('Task Assigned successfully');
+      let today = new Date();
+      let counter = today.getTime() + "" + today.getDate() + "" + (today.getMonth() + 1) + "" + today.getFullYear();
+      try {
+        await setDoc(doc(db, formValues[i].date, "#" + counter), {
+          date: formValues[i].date,
+          workstation: formValues[i].workStation,
+          substation: formValues[i].model,
+          count: formValues[i].count,
+          time: formValues[i].timeTaken,
+          id: "#" + counter,
+        });
+        toast.success('Task Assigned successfully');
+      }
+      catch {
+        toast.error('Error Occurred');
+      }
+      await setDoc(doc(db, "total", formValues[i].date), {
+        date: formValues[i].date,
+      });
+    }
+    setFormValues([{ date: "", workStation: "", model: "", count: "", timeTaken: "", modelProp: [] }])
   }
-     catch{
-       toast.error('Error Occurred');
-     }
-       await setDoc(doc(db, "total", formValues[i].date), {
-         date:formValues[i].date,
-       });}
-setFormValues([{ date: "", workStation: "", model: "", count: "", timeTaken: "" ,modelProp:[]}])
-     }
 
   return (
     <div>
@@ -83,25 +85,25 @@ setFormValues([{ date: "", workStation: "", model: "", count: "", timeTaken: "" 
                   <thead className="table table-dark">
                     <tr>
                       <th scope="col">No</th>
-                      <th scope="col">Date</th>
-                      <th scope="col">Workstartion</th>
-                      <th scope="col">Model</th>
-                      <th scope="col">Planned count</th>
-                      <th scope="col">Planned time</th>
+                      <th scope="col">{DATE}</th>
+                      <th scope="col">{WORK_STATION}</th>
+                      <th scope="col">{WORK_STATION_MODEL}</th>
+                      <th scope="col">{TOTAL_COUNT}</th>
+                      <th scope="col">{TOTAL_TIME}</th>
                       <th scope="col"> </th>
                     </tr>
                   </thead>
                   <tbody>
-                     {formValues.map((element, index) => (
+                    {formValues.map((element, index) => (
                       <Taskinput key={index} index={index} element={element} handleChange={handleChange} info={props.info} removeFormFields={removeFormFields} />
-                  ))}
+                    ))}
                   </tbody>
                 </table>
-              <div className="button-section">
-                <center>
-                  <button className="btn btn-outline-secondary" type="button" onClick={() => addFormFields()}>+ Add field</button>
-                  <div className=" mt-3" ><button className="btn btn-primary" style={{ width: "22rem" }} type="submit">Publish</button>
-                  </div></center></div></form>
+                <div className="button-section">
+                  <center>
+                    <button className="btn btn-outline-secondary" type="button" onClick={() => addFormFields()}>+ Add field</button>
+                    <div className=" mt-3" ><button className="btn btn-primary" style={{ width: "22rem" }} type="submit">Publish</button>
+                    </div></center></div></form>
             </div >
           </div>
         </div >
