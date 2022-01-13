@@ -58,6 +58,8 @@ const Task = (props) => {
           count: formValues[i].count,
           time: formValues[i].timeTaken,
           id: "#" + counter,
+          actualCount:"",
+          actualTime:"",
         });
         toast.success('Task Assigned successfully');
       }
