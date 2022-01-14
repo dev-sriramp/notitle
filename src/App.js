@@ -6,6 +6,8 @@ import LogIn from "./Components/Login/Login";
 import ViewReports from "./Components/Reports/ViewReports"
 import NotFound from "./Components/Others/NotFound"
 import Settings from "./Components/Settings/Settings";
+import Pending from "./Components/Reports/Pending";
+import Completed from "./Components/Reports/Completed";
 
 const App = () => {
   return (<AuthProvider >
@@ -16,6 +18,8 @@ const App = () => {
         <Route exact path="/Login" element={<LogIn />} />
         <Route exact path="/Report" element={<ViewReports />} />
         <Route exact path="/Settings" element={<Settings />} />
+        <Route exact path="/Pending" element={<Pending />} />
+        <Route exact path="/Completed" element={<Completed />} />
         <Route path="/*" element={<NotFound />} />
       </Routes >
     </Router>

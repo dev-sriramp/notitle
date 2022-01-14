@@ -8,6 +8,7 @@ import {ReactComponent as Downloadsvg} from '../../assets/download.svg';
 import {ReactComponent as Resetsvg} from '../../assets/restart.svg';
 import exportFromJSON from 'export-from-json'
 import { DATE,WORK_STATION,WORK_STATION_MODEL,TOTAL_COUNT,TOTAL_TIME} from "../../constants/constants";
+import { useNavigate } from 'react-router-dom';
 
 var DateInfo;
 var WorkStationInfo;
@@ -18,6 +19,7 @@ const ViewReports = () => {
   const [info,setInfo] =  useState([]);
   const [info1,setInfo1] =  useState([]);
   const [workStation, setWorkStation] = useState([]);
+  const navigate = useNavigate();
   useEffect(() => {
     Get()
   }, []);
@@ -137,10 +139,10 @@ const Reset = () =>{
             <p className="nav-link active">All Task</p>
           </li>
           <li className="nav-item">
-            <p className="nav-link"> Pending</p>
+            <p className="nav-link" onClick={() => navigate('/Pending')}> Pending</p>
           </li>
           <li className="nav-item">
-            <p className="nav-link"> Completed</p>
+            <p className="nav-link" onClick={() => navigate('/Completed')}> Completed</p>
           </li>
           <li class="nav-item">
         <p className="btn btn-white" onClick={()=>{Reset()}}> <Resetsvg></Resetsvg> Reset</p>
