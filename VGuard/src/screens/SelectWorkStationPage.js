@@ -1,67 +1,56 @@
 import React, { useState, useEffect } from 'react';
 import firestore from '@react-native-firebase/firestore';
-import {
-  Center,
-  NativeBaseProvider,
-  CheckIcon,
-  Select,
-  FormControl,
-  Container,
-  Button,
-  WarningOutlineIcon,
-  Text,
-  ScrollView,
-
-
-} from 'native-base';
+import { Center, NativeBaseProvider, CheckIcon, Select, FormControl, Container, Button, WarningOutlineIcon, StatusBar, } from 'native-base';
 const SelectWorkStationPage = ({ navigation }) => {
   const [workStation, setWorkStation] = React.useState("");
   const [updateWorkStation, setUpdateWorkStation] = useState([]);
   const [error, setError] = useState(null);
   const valueSelected = () => {
-    console.log(workStation.length)
     if (workStation.length === 0) {
-      
+
       setError(<FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>
         Please make a selection!
       </FormControl.ErrorMessage>);
-      console.log(updateWorkStation);
     }
     else {
       setError(null);
-      navigation.navigate("LandScreen",{workStation:workStation})
+      navigation.navigate("LandScreen", { workStation: workStation })
     }
   }
   useEffect(() => {
     GetData();
-  },[])
+  }, [])
 
-  const GetData = async()=>{
+  const GetData = async () => {
     const formValues = [];
     await firestore()
-    .collection('workstation')
-    .get()
-    .then(querySnapshot => {
-     
+      .collection('workstation')
+      .get()
+      .then(querySnapshot => {
 
-      querySnapshot.forEach(documentSnapshot => {
-        console.log(documentSnapshot.data().workstation);
-        formValues.push(documentSnapshot.data().workstation);
 
+        querySnapshot.forEach(documentSnapshot => {
+          formValues.push(documentSnapshot.data().workstation);
+
+        });
       });
-    });
-     setUpdateWorkStation(formValues);
+    setUpdateWorkStation(formValues);
   }
- 
- 
-  
+
+
+
   const selectWorkStation = (props) => {
     setWorkStation(props);
-    console.log(updateWorkStation)
-
   }
   return (
     <NativeBaseProvider>
+      <StatusBar
+        barStyle="dark-content"
+        hidden={false}
+        backgroundColor="#ffffff"
+        translucent={false}
+        networkActivityIndicatorVisible={true}
+      />
       {/* <ScrollView> */}
       <Center flex={1} px="3">
         <Container>
@@ -80,16 +69,16 @@ const SelectWorkStationPage = ({ navigation }) => {
               mb="1"
               onValueChange={(itemValue) => selectWorkStation(itemValue)}
             >
-             {
-               updateWorkStation.map((element,index)=>(
-                <Select.Item key={index} label={element} value={element} />
-               ))
-             }
-             
+              {
+                updateWorkStation.map((element, index) => (
+                  <Select.Item key={index} label={element} value={element} />
+                ))
+              }
+
             </Select>
             {error}
           </FormControl>
-          
+
           <Button minWidth="200"
             minHeight={12}
             onPress={valueSelected}
