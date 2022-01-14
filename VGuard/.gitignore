@@ -59,6 +59,7 @@ buck-out
 local.properties
 *.iml
 build/
+vguard.*
 
 
 # Node
