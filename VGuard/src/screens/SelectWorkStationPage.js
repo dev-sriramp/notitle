@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import firestore from '@react-native-firebase/firestore';
-import { Center, NativeBaseProvider, CheckIcon, Select, FormControl, Container, Button, WarningOutlineIcon, StatusBar, } from 'native-base';
+import {Picker} from '@react-native-picker/picker';
+import { Center, NativeBaseProvider, Text, CheckIcon, Select, FormControl, Container, Button, WarningOutlineIcon, StatusBar, Heading, } from 'native-base';
 const SelectWorkStationPage = ({ navigation }) => {
   const [workStation, setWorkStation] = React.useState("");
   const [updateWorkStation, setUpdateWorkStation] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedLanguage, setSelectedLanguage] = useState();
   const valueSelected = () => {
     if (workStation.length === 0) {
 
-      setError(<FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>
-        Please make a selection!
-      </FormControl.ErrorMessage>);
+      setError(
+        "Please make a selection!"
+      );
     }
     else {
       setError(null);
@@ -20,7 +23,6 @@ const SelectWorkStationPage = ({ navigation }) => {
   useEffect(() => {
     GetData();
   }, [])
-
   const GetData = async () => {
     const formValues = [];
     await firestore()
@@ -35,9 +37,25 @@ const SelectWorkStationPage = ({ navigation }) => {
         });
       });
     setUpdateWorkStation(formValues);
+    setLoading(false);
   }
 
-
+  if (loading) {
+    return (
+      <NativeBaseProvider>
+        <StatusBar
+        barStyle="dark-content"
+        hidden={false}
+        backgroundColor="#ffffff"
+        translucent={false}
+        networkActivityIndicatorVisible={true}
+      />
+      <Center>
+        <Heading>Loading</Heading>
+        </Center>
+      </NativeBaseProvider>
+    )
+  }
 
   const selectWorkStation = (props) => {
     setWorkStation(props);
@@ -51,41 +69,32 @@ const SelectWorkStationPage = ({ navigation }) => {
         translucent={false}
         networkActivityIndicatorVisible={true}
       />
-      {/* <ScrollView> */}
       <Center flex={1} px="3">
         <Container>
           <FormControl isRequired isInvalid>
-            <FormControl.Label>Choose Workstation</FormControl.Label>
-            <Select
-              minWidth="200"
+            <FormControl.Label><Heading>Choose Workstation </Heading></FormControl.Label>
+            <Picker
               selectedValue={workStation}
-              accessibilityLabel="Choose Workstation"
-              placeholder="Choose Workstation"
-              _selectedItem={{
-                bg: "teal.600",
-                endIcon: <CheckIcon size={5} />,
-              }}
-              mt="1"
-              mb="1"
-              onValueChange={(itemValue) => selectWorkStation(itemValue)}
-            >
+              onValueChange={(itemValue, itemIndex) =>
+                selectWorkStation(itemValue)
+              }>
+                <Picker.Item label="" value="" />
               {
                 updateWorkStation.map((element, index) => (
-                  <Select.Item key={index} label={element} value={element} />
+                  <Picker.Item key={index} label={element} value={element} />
+                  
                 ))
               }
-
-            </Select>
+            </Picker>
             {error}
           </FormControl>
 
-          <Button minWidth="200"
+          <Button mt={5} minWidth="200"
             minHeight={12}
             onPress={valueSelected}
             colorScheme="success">Next</Button>
         </Container>
       </Center>
-      {/* </ScrollView> */}
     </NativeBaseProvider>
   );
 };

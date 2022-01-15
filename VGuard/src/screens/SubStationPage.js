@@ -21,7 +21,6 @@ const SubStationPage = ({ navigation, route }) => {
       });
     setUpdateSubStation(formValues);
   }
-
   const updateCount = (props) => {
     navigation.navigate("UpdateCount", { model: props, workStation: workStation.workStation });
 
@@ -29,7 +28,7 @@ const SubStationPage = ({ navigation, route }) => {
 
   return (
     <NativeBaseProvider>
-      <StatusBar
+     <StatusBar
         barStyle="dark-content"
         hidden={false}
         backgroundColor="#ffffff"

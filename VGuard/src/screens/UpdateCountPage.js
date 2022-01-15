@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import firestore from '@react-native-firebase/firestore';
-import {Text,StatusBar,Center,NativeBaseProvider,Button,ScrollView,Stack,Input,FormControl,Box,} from 'native-base';
+import {Text,StatusBar,Center,NativeBaseProvider,Button,ScrollView,Stack,Input,FormControl,Box, Heading,} from 'native-base';
 const UpdateCountPage = ({ navigation, route }) => {
   const [updateCount, setUpdateCount] = useState([]);
   const [inputValues, setInputValues] = useState({ count: "", time: "" })
@@ -67,17 +67,33 @@ const UpdateCountPage = ({ navigation, route }) => {
     setInputValues(newFormValues);
 
   }
-
-  return (
-    <NativeBaseProvider>
-      <StatusBar
+  if(updateCount===undefined){
+    return(
+      <NativeBaseProvider>
+        <StatusBar
         barStyle="dark-content"
         hidden={false}
         backgroundColor="#ffffff"
         translucent={false}
         networkActivityIndicatorVisible={true}
       />
-      <Stack mt={10} flex={1} px="3">
+      <Center>
+        <Heading>No Data Found</Heading>
+        <Button mt={5} onPress={() => navigation.goBack()} >Go Back</Button>
+        </Center>
+      </NativeBaseProvider>
+    )
+  }
+  return (
+    <NativeBaseProvider>
+     <StatusBar
+        barStyle="dark-content"
+        hidden={false}
+        backgroundColor="#ffffff"
+        translucent={false}
+        networkActivityIndicatorVisible={true}
+      />
+      <Stack mt={5} flex={1} px="3">
         {/* <Container> */}
         <ScrollView>
           <Center>
@@ -106,6 +122,7 @@ const UpdateCountPage = ({ navigation, route }) => {
             </FormControl>
           </Box>
           <Button mt={5} onPress={() => { DataPush() }} >Submit</Button>
+          <Button mt={5} onPress={() => navigation.goBack()} >Go Back</Button>
         </ScrollView>
         {/* </Container> */}
       </Stack>
