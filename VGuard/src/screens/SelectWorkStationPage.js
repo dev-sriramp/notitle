@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import firestore from '@react-native-firebase/firestore';
 import {Picker} from '@react-native-picker/picker';
-import { Center, NativeBaseProvider, Text, CheckIcon, Select, FormControl, Container, Button, WarningOutlineIcon, StatusBar, Heading, } from 'native-base';
+import icon from "../util/icon.jpg";
+import { Center, NativeBaseProvider, Image, FormControl, Container, Button, StatusBar, Heading, } from 'native-base';
 const SelectWorkStationPage = ({ navigation }) => {
   const [workStation, setWorkStation] = React.useState("");
   const [updateWorkStation, setUpdateWorkStation] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [selectedLanguage, setSelectedLanguage] = useState();
   const valueSelected = () => {
     if (workStation.length === 0) {
 
@@ -69,7 +69,16 @@ const SelectWorkStationPage = ({ navigation }) => {
         translucent={false}
         networkActivityIndicatorVisible={true}
       />
+      <Center>
+      <Image
+       size={250}
+       resizeMode="center"
+      source={icon}
+      alt="Alternate Text"
+    />
+      </Center>
       <Center flex={1} px="3">
+      
         <Container>
           <FormControl isRequired isInvalid>
             <FormControl.Label><Heading>Choose Workstation </Heading></FormControl.Label>
