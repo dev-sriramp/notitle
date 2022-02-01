@@ -15,6 +15,7 @@ var WorkStationInfo;
 var WorkStationModelInfo;
 
 const Completed = () => {
+
     const { currentUser } = useContext(AuthContext);
     const [info, setInfo] = useState([]);
     const [info1, setInfo1] = useState([]);
@@ -33,21 +34,8 @@ const Completed = () => {
             res.push(data)
         })
         const res1 = [];
-         let today = new Date();
-        let mth;
-        let dt;
-        if (today.getMonth() + 1 < 10) {
-            mth = "" + today.getMonth() + 1;
-            dt = "" + today.getDate();
-        } else {
-            mth = today.getMonth() + 1;
-            dt = today.getDate();
-        }
-        let Counter = today.getFullYear() + "-" + mth + "-" + dt;
         for (let i = 0; i < res.length; i++) {
-            if (res[i].date.trim() === Counter) {
-                res1.push(res[i].date.trim());
-            }
+            res1.push(res[i].date.trim());
         };
         const res2 = [];
         for (let i = 0; i < res1.length; i++) {
@@ -179,7 +167,7 @@ const Completed = () => {
                                     </th>
                                     <th scope="col">
                                         <label className="form-label">{DATE}</label>
-                                        <input type="date" value={DateInfo} onChange={e => DateSort(e)} className="form-control" disabled></input>
+                                        <input type="date" value={DateInfo} onChange={e => DateSort(e)} className="form-control"></input>
                                     </th>
                                     <th scope="col">
                                         <label className="form-label">{WORK_STATION}</label>

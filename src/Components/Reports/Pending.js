@@ -7,7 +7,7 @@ import { query, orderBy, getDocs, collection, } from "firebase/firestore";
 import { ReactComponent as Downloadsvg } from '../../assets/download.svg';
 import { ReactComponent as Resetsvg } from '../../assets/restart.svg';
 import exportFromJSON from 'export-from-json'
-import { DATE, WORK_STATION, WORK_STATION_MODEL, TOTAL_COUNT, TOTAL_TIME} from "../../constants/constants";
+import { DATE, WORK_STATION, WORK_STATION_MODEL, TOTAL_COUNT, TOTAL_TIME } from "../../constants/constants";
 import { useNavigate } from 'react-router-dom';
 
 var DateInfo;
@@ -33,21 +33,8 @@ const Pending = () => {
             res.push(data)
         })
         const res1 = [];
-        let today = new Date();
-        let mth;
-        let dt;
-        if (today.getMonth() + 1 < 10) {
-            mth = "" + today.getMonth() + 1;
-            dt = "" + today.getDate();
-        } else {
-            mth = today.getMonth() + 1;
-            dt = today.getDate();
-        }
-        let Counter = today.getFullYear() + "-" + mth + "-" + dt;
         for (let i = 0; i < res.length; i++) {
-            if (res[i].date.trim() === Counter) {
-                res1.push(res[i].date.trim());
-            }
+            res1.push(res[i].date.trim());
         };
         const res2 = [];
         for (let i = 0; i < res1.length; i++) {
@@ -151,13 +138,13 @@ const Pending = () => {
             <div className="">
                 <ul className="nav nav-tabs">
                     <li className="nav-item">
-                        <p className="nav-link"  onClick={() => navigate('/Report')}>All Task</p>
+                        <p className="nav-link" onClick={() => navigate('/Report')}>All Task</p>
                     </li>
                     <li className="nav-item">
                         <p className="nav-link active"> Pending</p>
                     </li>
                     <li className="nav-item">
-                        <p className="nav-link"  onClick={() => navigate('/Completed')}> Completed</p>
+                        <p className="nav-link" onClick={() => navigate('/Completed')}> Completed</p>
                     </li>
                     <li class="nav-item">
                         <p className="btn btn-white" onClick={() => { Reset() }}> <Resetsvg></Resetsvg> Reset</p>
@@ -177,7 +164,7 @@ const Pending = () => {
                                     </th>
                                     <th scope="col">
                                         <label className="form-label">{DATE}</label>
-                                        <input type="date" value={DateInfo} onChange={e => DateSort(e)} className="form-control" disabled></input>
+                                        <input type="date" value={DateInfo} onChange={e => DateSort(e)} className="form-control"></input>
                                     </th>
                                     <th scope="col">
                                         <label className="form-label">{WORK_STATION}</label>
