@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import firestore from '@react-native-firebase/firestore';
-import { Text, Center, NativeBaseProvider, Container,Box , Pressable, Button, ScrollView, StatusBar,Image,Heading } from 'native-base';
-import icon from "../util/icon.jpg";
+import { Text, Center, NativeBaseProvider, Container,Box , Pressable, Button, ScrollView, StatusBar,Heading } from 'native-base';
+import SBar from '../components/StatusBar';
+// import icon from "../util/icon.jpg";
+import Image from "../components/Image";
+import icon from "../util/logo.jpg";
 const SubStationPage = ({ navigation, route }) => {
   const [updateSubStation, setUpdateSubStation] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -13,10 +16,14 @@ const SubStationPage = ({ navigation, route }) => {
   const GetData = async () => {
     var today = new Date();
     let month = today.getMonth() + 1
+    let tod = today.getDate();
+    if(tod<10){
+      tod = "0"+tod;
+    }
     if (month < 10) {
       month = "0" + month;
     }
-    var collection = today.getFullYear() + "-" + month + "-" + today.getDate();
+    var collection = today.getFullYear() + "-" + month + "-" + tod;
     const formValues = [];
     await firestore()
       .collection(collection).where("workstation","==",workStation.workStation)
@@ -37,13 +44,7 @@ const SubStationPage = ({ navigation, route }) => {
   if (loading) {
     return (
       <NativeBaseProvider>
-        <StatusBar
-        barStyle="dark-content"
-        hidden={false}
-        backgroundColor="#ffffff"
-        translucent={false}
-        networkActivityIndicatorVisible={true}
-      />
+        <SBar />
       <Center>
         <Heading>Loading</Heading>
         </Center>
@@ -53,13 +54,7 @@ const SubStationPage = ({ navigation, route }) => {
   if(updateSubStation.length==0){
     return (
       <NativeBaseProvider>
-        <StatusBar
-        barStyle="dark-content"
-        hidden={false}
-        backgroundColor="#ffffff"
-        translucent={false}
-        networkActivityIndicatorVisible={true}
-      />
+       <SBar />
       <Center>
         <Heading>No Work Found in the WorkStation</Heading>
         <Button mt={5} onPress={() => navigation.goBack()} >Go Back</Button>
@@ -70,22 +65,9 @@ const SubStationPage = ({ navigation, route }) => {
   }
 
   return (
-    <NativeBaseProvider>
-     <StatusBar
-        barStyle="dark-content"
-        hidden={false}
-        backgroundColor="#ffffff"
-        translucent={false}
-        networkActivityIndicatorVisible={true}
-      />
-      <Center>
-      <Image
-       size={250}
-       resizeMode="center"
-      source={icon}
-      alt="Alternate Text"
-    />
-      </Center>
+    <NativeBaseProvider >
+     <SBar />
+      <Image />
       <Center mt={10} flex={1} px="3">
         <Container>
           <ScrollView>
