@@ -29,7 +29,7 @@ const Taskinput = (props) =>{
           <input required className="form-control" type="number" name="count" value={props.element.count || ""} onChange={e => props.handleChange(props.index, e)} />
         </td>
         <td>
-          <input required className="form-control" type="time" name="timeTaken" value={props.element.timeTaken || ""} onChange={e => props.handleChange(props.index, e)} />
+          <input required className="form-control" type="text" name="timeTaken" value={props.element.timeTaken || ""} onChange={e => props.handleChange(props.index, e)} />
         </td>
         <td>   {
           props.index ?
