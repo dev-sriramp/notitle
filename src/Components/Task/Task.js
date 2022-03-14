@@ -106,6 +106,61 @@ const Task = (props) => {
     <div>
       <h2 className="pt-1 ps-1"> Assign Task</h2>
       <p className="ps-1 text-muted">You can add multiple fields and publish them in  single click.</p>
+      <div class="container">
+        <div class="row align-items-start">
+          <div class="col">
+          </div>
+          <div class="col">
+          </div>
+          <div class="col">
+            <div class="position-relative">
+              <div class="position-absolute top-50 start-100 translate-middle">
+                <button type="button" class="btn btn-primary mb-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  Import
+                </button>
+              </div>
+            </div>
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Preview</h5>
+                    <button type="button" class="btn btn-success" >Choose file</button>
+                  </div>
+                  <div class="modal-body">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Date</th>
+                          <th scope="col">Workstation</th>
+                          <th scope="col">Modal</th>
+                          <th scope="col">count</th>
+                          <th scope="col">time</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row">1</th>
+                          <td>10-12-2021</td>
+                          <td>Workstation 1</td>
+                          <td>small</td>
+                          <td>10</td>
+                          <td>10:55</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancle</button>
+                    <button type="button" class="btn btn-primary">Publish</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div>
         <div className="card border ">
           <div className="card-body">
