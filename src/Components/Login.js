@@ -2,11 +2,10 @@ import React, { useContext, useState } from "react";
 import { Navigate, } from "react-router-dom";
 import { AuthContext } from "./Auth";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { Auth } from "../../config";
+import { Auth } from "../config";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import background from "../../assets/Image.webp";
-toast.configure();
+toast.configure()
 
 const LogIn = () => {
   const [showpasswordtype, setpasswordtype] = useState("password");
@@ -14,35 +13,21 @@ const LogIn = () => {
     e.preventDefault();
     const { email, password } = e.target.elements;
     signInWithEmailAndPassword(Auth, email.value, password.value)
-      .then(() => {
-        toast.success("Logged in successfully");
-    }).catch(error => {
+      .then().catch(error => {
         toast.error("Check email or password");
       })
   }
 
   const { currentUser } = useContext(AuthContext);
   if (currentUser) {
-    return <Navigate to="/Assigntask"/>;
+    return <Navigate to="/Home" />;
   }
-//   header {
-//   position: relative;
-//   width: 100%;
-//   height: 100%;
-//   background-image: url(../img/BG.png);
-//   background-repeat: no-repeat;
-//   background-size: cover;
-//   display: block;
-// }
-  return (
-    <div>
-  <div style={{position:"absolute",  width:"100%",height:"100%",backgroundImage: `url(${background})`,backgroundSize:"cover" ,display:"block"}}>
-    {/* <img src={Image} style={{ backgroundRepeat:"no-repeat",backgroundSize:"cover"}} alt="image"></img> */}
+  return (<div>
     <form onSubmit={handleSubmit}>
-      <div className="continer-sm position-absolute top-50 start-0 translate-middle-y ms-5 shadow " style={{backgroundColor:"white", width: "23rem", borderRadius: "12px" }}>
+      <div className="continer-sm position-absolute top-50 start-50 translate-middle shadow " style={{ width: "23rem", borderRadius: "12px" }}>
         <div>
           <center>
-            <h2 className="fw-bolder mt-3" style={{ fontSize: "20px" }}>Production Planning and Control</h2>
+            <h2 className="fw-bolder mt-3">Welcomeback</h2>
             <p className="text-muted mb-3" style={{ fontSize: "12px" }}>Enter your credentials to access your account.</p>
           </center>
 
@@ -68,6 +53,6 @@ const LogIn = () => {
             </div>
           </div>
         </div></div></form>
-  </div></div>);
+  </div>);
 }
 export default LogIn;
