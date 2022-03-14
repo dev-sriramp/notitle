@@ -5,7 +5,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { Auth } from "../../config";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import background from "../../assets/Image.webp";
+import background from "../../assets/b.png";
 toast.configure();
 
 const LogIn = () => {
@@ -16,29 +16,28 @@ const LogIn = () => {
     signInWithEmailAndPassword(Auth, email.value, password.value)
       .then(() => {
         toast.success("Logged in successfully");
-    }).catch(error => {
+      }).catch(error => {
         toast.error("Check email or password");
       })
   }
 
   const { currentUser } = useContext(AuthContext);
   if (currentUser) {
-    return <Navigate to="/Assigntask"/>;
+    return <Navigate to="/Assigntask" />;
   }
-//   header {
-//   position: relative;
-//   width: 100%;
-//   height: 100%;
-//   background-image: url(../img/BG.png);
-//   background-repeat: no-repeat;
-//   background-size: cover;
-//   display: block;
-// }
+  //   header {
+  //   position: relative;
+  //   width: 100%;
+  //   height: 100%;
+  //   background-image: url(../img/BG.png);
+  //   background-repeat: no-repeat;
+  //   background-size: cover;
+  //   display: block;
+  // }
   return (
     <div>
-  <div style={{position:"absolute",  width:"100%",height:"100%",backgroundImage: `url(${background})`,backgroundSize:"cover" ,display:"block"}}>
-    {/* <img src={Image} style={{ backgroundRepeat:"no-repeat",backgroundSize:"cover"}} alt="image"></img> */}
-    <form onSubmit={handleSubmit}>
+      <div style={{ position: "absolute", width: "100%", height: "100%", backgroundImage: `url(${background})`, backgroundSize: "100% 100%", backgroundRepeat: "no-repeat", display: "block" }}>
+      <form onSubmit={handleSubmit}>
       <div className="continer-sm position-absolute top-50 start-0 translate-middle-y ms-5 shadow " style={{backgroundColor:"white", width: "23rem", borderRadius: "12px" }}>
         <div>
           <center>
@@ -68,6 +67,7 @@ const LogIn = () => {
             </div>
           </div>
         </div></div></form>
-  </div></div>);
+      </div>
+    </div>);
 }
 export default LogIn;
