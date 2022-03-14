@@ -5,7 +5,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { Auth } from "../../config";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import background from "../../assets/Image.webp";
+import background from "../../assets/b.png";
 toast.configure();
 
 const LogIn = () => {
@@ -36,7 +36,7 @@ const LogIn = () => {
 // }
   return (
     <div>
-  <div style={{position:"absolute",  width:"100%",height:"100%",backgroundImage: `url(${background})`,backgroundSize:"cover" ,display:"block"}}>
+  <div style={{position:"absolute",  width:"100%",height:"100%",backgroundImage: `url(${background})`,backgroundSize:"100% 100%", backgroundRepeat:"no-repeat" ,display:"block"}}>
     {/* <img src={Image} style={{ backgroundRepeat:"no-repeat",backgroundSize:"cover"}} alt="image"></img> */}
     <form onSubmit={handleSubmit}>
       <div className="continer-sm position-absolute top-50 start-0 translate-middle-y ms-5 shadow " style={{backgroundColor:"white", width: "23rem", borderRadius: "12px" }}>

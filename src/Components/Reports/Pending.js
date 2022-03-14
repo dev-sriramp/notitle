@@ -7,7 +7,7 @@ import { query, orderBy, getDocs, collection, } from "firebase/firestore";
 import { ReactComponent as Downloadsvg } from '../../assets/download.svg';
 import { ReactComponent as Resetsvg } from '../../assets/restart.svg';
 import exportFromJSON from 'export-from-json'
-import { DATE, WORK_STATION, WORK_STATION_MODEL, TOTAL_COUNT, TOTAL_TIME } from "../../constants/constants";
+import { TOTAL_COUNT, TOTAL_TIME } from "../../constants/constants";
 import { useNavigate } from 'react-router-dom';
 
 var DateInfo;
@@ -133,10 +133,9 @@ const Pending = () => {
     return (
         <div>
             <Navbar home={"btn btn-light me-3"} report={"btn btn-primary me-3"} settings={"btn btn-light me-3"} ></Navbar>
-            <h2 className="ps-1 pt-1"> Reports</h2>
-            <p className="ps-1 text-muted">You can filter the reports and download it.</p>
-            <div className="">
-                <ul className="nav nav-tabs">
+            <h2 className="ps-4 pt-1"> Reports</h2>
+            <div className="m-4" style={{borderRadius:"12px" , boxShadow:"0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)"}}>
+                <ul className="nav nav-tabs p-3">
                     <li className="nav-item">
                         <p className="nav-link" onClick={() => navigate('/Report')}>All Task</p>
                     </li>
@@ -146,10 +145,10 @@ const Pending = () => {
                     <li className="nav-item">
                         <p className="nav-link" onClick={() => navigate('/Completed')}> Completed</p>
                     </li>
-                    <li class="nav-item">
+                    <li className="nav-item">
                         <p className="btn btn-white" onClick={() => { Reset() }}> <Resetsvg></Resetsvg> Reset</p>
                     </li>
-                    <li class="nav-item">
+                    <li className="nav-item">
                         <p className="btn btn-white" onClick={() => { ExportToExcel() }}><Downloadsvg></Downloadsvg> Download Report</p>
                     </li>
                 </ul>
@@ -159,23 +158,19 @@ const Pending = () => {
                             <thead className="table">
                                 <tr>
                                     <th scope="col">
-                                        <label className="form-label">id</label>
-                                        <input type="number" className="form-control"></input>
+                                        <input type="number" placeholder="id" className="form-control"></input>
                                     </th>
                                     <th scope="col">
-                                        <label className="form-label">{DATE}</label>
                                         <input type="date" value={DateInfo} onChange={e => DateSort(e)} className="form-control"></input>
                                     </th>
                                     <th scope="col">
-                                        <label className="form-label">{WORK_STATION}</label>
                                         <select className="form-select" value={WorkStationInfo} onChange={(e) => WorkStationSort(e)} aria-label="Default select example">
-                                            <option value="" selected>All</option>
+                                            <option value="">All WorkStation</option>
                                             {workStation.map((data) => (<option key={data} value={data}>{data}</option>))}
                                         </select></th>
                                     <th scope="col">
-                                        <label className="form-label">{WORK_STATION_MODEL}</label>
                                         <select className="form-select" value={WorkStationModelInfo} onChange={(e) => WorkStationModelSort(e)} aria-label="Default select example">
-                                            <option value="" selected>All</option>
+                                            <option value="">All Model</option>
                                             <option value="small">small</option>
                                             <option value="medium">medium</option>
                                             <option value="large">large</option>
@@ -195,7 +190,7 @@ const Pending = () => {
                                         workstation={d.workstation}
                                         model={d.substation}
                                         count={d.count}
-                                        time={d.time}
+                                        time={d.hr+":"+d.min+" hrs"}
                                     />
                                 ))}
                             </tbody>

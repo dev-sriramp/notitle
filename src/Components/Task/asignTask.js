@@ -26,9 +26,9 @@ setInfo(res);
     return <Navigate to="/LogIn" />;
   }
   return (
-    <div className="App">
+    <div className="App" >
       <Navbar home={"btn btn-primary me-3"} report={"btn btn-light me-3"} settings={"btn btn-light me-3"} ></Navbar>
-      <div className="continer-fluid">
+      <div className="continer-fluid" >
       <Task info={info}></Task>
       </div>
     </div>

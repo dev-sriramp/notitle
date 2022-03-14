@@ -1,35 +1,28 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {ReactComponent as Settingssvg} from '../../assets/settings.svg';
-import {ReactComponent as Tasksvg} from '../../assets/add_task.svg';
-import {ReactComponent as Repotssvg} from '../../assets/repots.svg';
-import APP_NAME from "../../constants/constants";
+import { ReactComponent as Settingssvg } from '../../assets/settings.svg';
 
 const Navbar = (props) => {
     return (
         <div>
-            <div className="topnav ">
-                <nav className="navbar navbar-light bg-light">
-                    <div className="ms-1 ">
-                        <div className="">
-                        <button    className="btn btn-light me-3">
-                       <span className="badge bg-warning text-dark" >{APP_NAME}</span>
-                        </button>
-                        </div>
+            <div className="topnav mb-3">
+                <nav className="navbar navbar">
+                    <div className="ms-5 ">
+                        <img src="https://www.vguard.in/waterpurifier/assets/images/logo.png" alt="" width="75" height="30"></img>
                     </div>
                     <ul className="nav justify-content-center">
-                    <li className="nav-item">
-                    <Link to="/Assigntask"><button className={props.home}>
-                            <Tasksvg></Tasksvg> Assign Task</button></Link>
-                            <Link to="/Report"><button className={props.report} >
-                            <Repotssvg></Repotssvg> ViewReports</button></Link>
-                    </li>
+                        <li className="nav-item">
+                            
+                        </li>
                     </ul>
                     <div className="me">
-                    
-                    <Link to="/Settings"><button className={props.settings}><Settingssvg></Settingssvg> </button></Link>
+                    <Link to="/Assigntask"><button className={props.home} >
+                                 Assign Task</button></Link>
+                            <Link to="/Report"><button className={props.report} >
+                                 ViewReports</button></Link>
+                        <Link to="/Settings"><button className={props.settings}><Settingssvg></Settingssvg> </button></Link>
 
-                        </div>
+                    </div>
 
                 </nav>
             </div>

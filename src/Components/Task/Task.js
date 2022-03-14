@@ -5,13 +5,18 @@ import { setDoc, doc, getDocs, collection } from "firebase/firestore";
 import { toast } from 'react-toastify';
 import { DATE, WORK_STATION, WORK_STATION_MODEL, TOTAL_COUNT, TOTAL_TIME } from "../../constants/constants";
 import 'react-toastify/dist/ReactToastify.css';
-
+import * as xlsx from "xlsx";
 toast.configure()
 
 const Task = (props) => {
+  const [excelData, setexcelData] = useState([]);
+  const [formValues, setFormValues] = useState([{ date: "", workStation: "", model: "", count: "", hr: "",min:"", modelProp: [] }])
+  const [handleclick, sethandleclick] = useState(false);
 
+  function handleClick() {
+    sethandleclick(!handleclick);
+  }
 
-  const [formValues, setFormValues] = useState([{ date: "", workStation: "", model: "", count: "", timeTaken: "", modelProp: [] }])
 
   let handleChange = async (i, e) => {
     const res = [];
@@ -33,7 +38,7 @@ const Task = (props) => {
   }
 
   let addFormFields = () => {
-    setFormValues([...formValues, { date: "", workStation: "", model: "", count: "", timeTaken: "", modelProp: [] }])
+    setFormValues([...formValues, { date: "", workStation: "", model: "", count: "", hr: "",min:"", modelProp: [] }])
   }
 
   let removeFormFields = (i) => {
@@ -56,10 +61,11 @@ const Task = (props) => {
           workstation: formValues[i].workStation,
           substation: formValues[i].model,
           count: formValues[i].count,
-          time: formValues[i].timeTaken,
+          hr: formValues[i].hr,
+          min:formValues[i].min,
           id: "#" + counter,
-          actualCount:"",
-          actualTime:"",
+          actualCount: "",
+          actualTime: "",
         });
         toast.success('Task Assigned successfully');
       }
@@ -70,18 +76,148 @@ const Task = (props) => {
         date: formValues[i].date,
       });
     }
-    setFormValues([{ date: "", workStation: "", model: "", count: "", timeTaken: "", modelProp: [] }])
+    setFormValues([{ date: "", workStation: "", model: "", count: "",  hr: "",min:"", modelProp: [] }])
+  }
+  let publishData = async (e) => {
+
+    e.preventDefault();
+    let len = excelData.length;
+    for (let i = 0; i < len; i++) {
+      console.log(excelData[i]);
+      let today = new Date();
+      let counter = today.getTime() + "" + today.getDate() + "" + (today.getMonth() + 1) + "" + today.getFullYear();
+      try {
+        await setDoc(doc(db, excelData[i].date, "#" + counter), {
+          date: excelData[i].date,
+          workstation: excelData[i].workstation,
+          substation: excelData[i].substation,
+          count: excelData[i].count+'',
+          hr: excelData[i].hr+'',
+          min:excelData[i].min+'',
+          id: "#" + counter,
+          actualCount: "",
+          actualTime: "",
+        });
+        toast.success('Task Assigned successfully');
+      }
+      catch {
+        toast.error('Error Occurred');
+      }
+      await setDoc(doc(db, "total", excelData[i].date), {
+        date: excelData[i].date,
+      });
+    }
+    setexcelData([])
+    handleClick();
+  }
+  // used to convert excel data to json
+  const readUploadFile = (e) => {
+    e.preventDefault();
+    if (e.target.files) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const data = e.target.result;
+        console.log(data);
+        const workbook = xlsx.read(data, { type: "array" });
+        const sheetName = workbook.SheetNames[0];
+        const worksheet = workbook.Sheets[sheetName];
+        const json = xlsx.utils.sheet_to_json(worksheet);
+        console.log(json);
+        SortJson(json);
+        console.log(json)
+      };
+      reader.readAsArrayBuffer(e.target.files[0]);
+    }
+  }
+
+  function SortJson(json) {
+    const dataThreads = json.map((data) => {
+      console.log(data)
+      return {
+        date: data.date,
+        workstation: data.workstation,
+        substation: data.substation,
+        count: data.count,
+        hr: data.hr,
+        min:data.min,
+        // model: "small"
+      };
+    })
+    setexcelData(dataThreads);
+    console.log(dataThreads);
+    handleClick();
   }
 
   return (
     <div>
-      <h2 className="pt-1 ps-1"> Assign Task</h2>
+      <div class="container-fulid mt-1 ms-4 me-4">
+        <div class="row">
+          <div class="col-10">
+            <h2 style={{textAlign:"left"}}>Assign Task</h2>
+          </div>
+          <div class="col-2" style={{textAlign:"right"}} >
+            <button  type="button" class="btn btn-secondary " data-bs-toggle="modal" data-bs-target="#exampleModal">
+              Import
+            </button>
 
-      <p className="ps-1 text-muted">You can add multiple fields and publish them in  single click.</p>
-      <div>
-        <div className="card border ">
+          </div>
+        </div>
+      </div>
+
+
+      <div class="container-fulid m-4 mt-2 " >
+        <div className="card border border-light  " style={{ borderRadius: "12px", boxShadow: "0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)" }}>
           <div className="card-body">
-            <div className="table-responsive ">
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Preview</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  {!handleclick ?
+                    <center>
+                      <div class="input-group p-3">
+                        <input type="file" onChange={readUploadFile} class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" />
+                      </div>
+                      <p>Choose file to import</p>  </center> :
+                       <div class="modal-body">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Workstation</th>
+                            <th scope="col">Modal</th>
+                            <th scope="col">count</th>
+                            <th scope="col">time</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {excelData.map(function (data, index) {
+                            return (
+                              <tr>
+                                <th scope="row">{index + 1}</th>
+                                <td>{data.date}</td>
+                                <td>{data.workstation}</td>
+                                <td>{data.substation}</td>
+                                <td>{data.count}</td>
+                                <td>{data.hr+":"+data.min+" hrs"}</td>
+                              </tr>
+                            )
+                          })}
+                        </tbody>
+                      </table>
+                    </div>}
+                  {!handleclick ? null : <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onClick={handleClick}>Clear</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick={publishData}>Publish</button>
+                  </div>}
+                </div>
+              </div>
+            </div>
+            <div className="table-responsive" style={{ borderRadius: "12px" }}>
               <form onSubmit={handleSubmit}>
                 <table className="table table-bordered ">
                   <thead className="table table-dark">
@@ -109,6 +245,8 @@ const Task = (props) => {
             </div >
           </div>
         </div >
+      </div>
+      <div>
       </div>
     </div>
   )
