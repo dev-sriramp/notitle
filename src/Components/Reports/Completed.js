@@ -137,7 +137,6 @@ const Completed = () => {
         <div>
             <Navbar home={"btn btn-light me-3"} report={"btn btn-primary me-3"} settings={"btn btn-light me-3"} ></Navbar>
             <h2 className="ps-1 pt-1"> Reports</h2>
-            <p className="ps-1 text-muted">You can filter the reports and download it.</p>
             <div className="">
                 <ul className="nav nav-tabs">
                     <li className="nav-item">
