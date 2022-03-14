@@ -78,7 +78,7 @@ const Task = (props) => {
     setFormValues([{ date: "", workStation: "", model: "", count: "", timeTaken: "", modelProp: [] }])
   }
   let publishData = async (e) => {
-  
+
     e.preventDefault();
     let len = excelData.length;
     for (let i = 0; i < len; i++) {
@@ -143,22 +143,25 @@ const Task = (props) => {
 
   return (
     <div>
-      <h2 className="pt-1 ps-1"> Assign Task</h2>
-      <p className="ps-1 text-muted">You can add multiple fields and publish them in  single click.</p>
-      <div class="container">
-        <div class="row align-items-start">
-          <div class="col">
+      <div class="container-fulid mt-1 ms-4 me-4">
+        <div class="row">
+          <div class="col-10">
+            <h2 style={{textAlign:"left"}}>Assign Task</h2>
           </div>
-          <div class="col">
+          <div class="col-2" style={{textAlign:"right"}} >
+            <button  type="button" class="btn btn-secondary " data-bs-toggle="modal" data-bs-target="#exampleModal">
+              Import
+            </button>
+
           </div>
-          <div class="col">
-            <div class="position-relative">
-              <div class="position-absolute top-50 start-100 translate-middle">
-                <button type="button" class="btn btn-primary mb-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                  Import
-                </button>
-              </div>
-            </div>
+        </div>
+      </div>
+
+
+      <div class="container-fulid m-4 mt-2 " >
+        <div className="card border border-light  " style={{ borderRadius: "12px", boxShadow: "0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)" }}>
+          <div className="card-body">
+
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
@@ -169,7 +172,7 @@ const Task = (props) => {
                   {!handleclick ?
                     <center>
                       <div class="input-group p-3">
-                        <input type="file"  onChange={readUploadFile} class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" />
+                        <input type="file" onChange={readUploadFile} class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" />
                       </div>
                       <p>Choose file to import</p>  </center> : <div class="modal-body">
                       <table class="table">
@@ -184,7 +187,7 @@ const Task = (props) => {
                           </tr>
                         </thead>
                         <tbody>
-                          {excelData.map(function (data,index) {
+                          {excelData.map(function (data, index) {
                             return (
                               <tr>
                                 <th scope="row">{index + 1}</th>
@@ -199,20 +202,14 @@ const Task = (props) => {
                         </tbody>
                       </table>
                     </div>}
-                  {!handleclick?null:<div class="modal-footer">
-                    <button type="button" class="btn btn-secondary"  onClick={handleClick}>Clear</button>
+                  {!handleclick ? null : <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onClick={handleClick}>Clear</button>
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick={publishData}>Publish</button>
                   </div>}
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div className="card border ">
-          <div className="card-body">
-            <div className="table-responsive ">
+            <div className="table-responsive" style={{ borderRadius: "12px" }}>
               <form onSubmit={handleSubmit}>
                 <table className="table table-bordered ">
                   <thead className="table table-dark">
@@ -240,6 +237,8 @@ const Task = (props) => {
             </div >
           </div>
         </div >
+      </div>
+      <div>
       </div>
     </div>
   )
