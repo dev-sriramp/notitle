@@ -9,8 +9,14 @@ import * as xlsx from "xlsx";
 toast.configure()
 
 const Task = (props) => {
-  const [excelData,setexcelData] = useState();
+  const [excelData, setexcelData] = useState([]);
   const [formValues, setFormValues] = useState([{ date: "", workStation: "", model: "", count: "", timeTaken: "", modelProp: [] }])
+  const [handleclick, sethandleclick] = useState(false);
+
+  function handleClick() {
+    sethandleclick(!handleclick);
+  }
+
 
   let handleChange = async (i, e) => {
     const res = [];
@@ -71,6 +77,37 @@ const Task = (props) => {
     }
     setFormValues([{ date: "", workStation: "", model: "", count: "", timeTaken: "", modelProp: [] }])
   }
+  let publishData = async (e) => {
+  
+    e.preventDefault();
+    let len = excelData.length;
+    for (let i = 0; i < len; i++) {
+      console.log(excelData[i]);
+      let today = new Date();
+      let counter = today.getTime() + "" + today.getDate() + "" + (today.getMonth() + 1) + "" + today.getFullYear();
+      try {
+        await setDoc(doc(db, excelData[i].date, "#" + counter), {
+          date: excelData[i].date,
+          workstation: excelData[i].workstation,
+          substation: excelData[i].model,
+          count: excelData[i].count,
+          time: excelData[i].time,
+          id: "#" + counter,
+          actualCount: "",
+          actualTime: "",
+        });
+        toast.success('Task Assigned successfully');
+      }
+      catch {
+        toast.error('Error Occurred');
+      }
+      await setDoc(doc(db, "total", excelData[i].date), {
+        date: excelData[i].date,
+      });
+    }
+    setexcelData([])
+    handleClick();
+  }
   //used to convert excel data to json
   const readUploadFile = (e) => {
     e.preventDefault();
@@ -100,6 +137,8 @@ const Task = (props) => {
       };
     })
     setexcelData(dataThreads);
+    console.log(dataThreads);
+    handleClick();
   }
 
   return (
@@ -125,36 +164,45 @@ const Task = (props) => {
                 <div class="modal-content">
                   <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Preview</h5>
-                    <button type="button" class="btn btn-success" >Choose file</button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
-                  <div class="modal-body">
-                    <table class="table">
-                      <thead>
-                        <tr>
-                          <th scope="col">#</th>
-                          <th scope="col">Date</th>
-                          <th scope="col">Workstation</th>
-                          <th scope="col">Modal</th>
-                          <th scope="col">count</th>
-                          <th scope="col">time</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <th scope="row">1</th>
-                          <td>10-12-2021</td>
-                          <td>Workstation 1</td>
-                          <td>small</td>
-                          <td>10</td>
-                          <td>10:55</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancle</button>
-                    <button type="button" class="btn btn-primary">Publish</button>
-                  </div>
+                  {!handleclick ?
+                    <center>
+                      <div class="input-group p-3">
+                        <input type="file"  onChange={readUploadFile} class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" />
+                      </div>
+                      <p>Choose file to import</p>  </center> : <div class="modal-body">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Workstation</th>
+                            <th scope="col">Modal</th>
+                            <th scope="col">count</th>
+                            <th scope="col">time</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {excelData.map(function (data,index) {
+                            return (
+                              <tr>
+                                <th scope="row">{index + 1}</th>
+                                <td>{data.date}</td>
+                                <td>{data.workstation}</td>
+                                <td>{data.model}</td>
+                                <td>{data.count}</td>
+                                <td>{data.time}</td>
+                              </tr>
+                            )
+                          })}
+                        </tbody>
+                      </table>
+                    </div>}
+                  {!handleclick?null:<div class="modal-footer">
+                    <button type="button" class="btn btn-secondary"  onClick={handleClick}>Clear</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick={publishData}>Publish</button>
+                  </div>}
                 </div>
               </div>
             </div>
