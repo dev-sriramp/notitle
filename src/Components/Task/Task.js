@@ -5,11 +5,12 @@ import { setDoc, doc, getDocs, collection } from "firebase/firestore";
 import { toast } from 'react-toastify';
 import { DATE, WORK_STATION, WORK_STATION_MODEL, TOTAL_COUNT, TOTAL_TIME } from "../../constants/constants";
 import 'react-toastify/dist/ReactToastify.css';
-import * as xlsx from "xlsx";
+
 toast.configure()
 
 const Task = (props) => {
-  const [excelData,setexcelData] = useState();
+
+
   const [formValues, setFormValues] = useState([{ date: "", workStation: "", model: "", count: "", timeTaken: "", modelProp: [] }])
 
   let handleChange = async (i, e) => {
@@ -70,36 +71,6 @@ const Task = (props) => {
       });
     }
     setFormValues([{ date: "", workStation: "", model: "", count: "", timeTaken: "", modelProp: [] }])
-  }
-  //used to convert excel data to json
-  const readUploadFile = (e) => {
-    e.preventDefault();
-    if (e.target.files) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const data = e.target.result;
-        const workbook = xlsx.read(data, { type: "array" });
-        const sheetName = workbook.SheetNames[0];
-        const worksheet = workbook.Sheets[sheetName];
-        const json = xlsx.utils.sheet_to_json(worksheet);
-        SortJson(json);
-      };
-      reader.readAsArrayBuffer(e.target.files[0]);
-    }
-  }
-
-  function SortJson(json) {
-    const dataThreads = json.map((data) => {
-      return {
-        date: data.date,
-        workstation: data.workstation,
-        substation: data.substation,
-        count: data.count,
-        time: data.time,
-        model: "small"
-      };
-    })
-    setexcelData(dataThreads);
   }
 
   return (
