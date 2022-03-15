@@ -164,7 +164,7 @@ setInfo(res);
                 <div className="card-body">
                     <h6 className="mb-3"><Accountsvg></Accountsvg> Account Settings</h6>
                 <div className="d-grid mb-3 gap-2">
-                <button type="button"   className="btn btn-outline-secondary " data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                <button type="button"   className="btn btn-outline-secondary ">
                       Change Password 
                         </button>
                 <button type="button"   className="btn btn-secondary " data-bs-toggle="modal" data-bs-target="#staticBackdrop">

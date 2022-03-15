@@ -167,8 +167,8 @@ const Task = (props) => {
       </div>
 
 
-      <div class="container-fulid m-4 mt-2 " >
-        <div className="card border border-light  " style={{ borderRadius: "12px", boxShadow: "0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)" }}>
+      <div class="container-fulid m-4 mt-2 ">
+        <div className="card border border-light  " data-spy="scroll" style={{ borderRadius: "12px", overflow:"scroll", height:"600px",boxShadow: "0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)" }}>
           <div className="card-body">
 
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

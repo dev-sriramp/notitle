@@ -134,7 +134,7 @@ const Pending = () => {
         <div>
             <Navbar home={"btn btn-light me-3"} report={"btn btn-primary me-3"} settings={"btn btn-light me-3"} ></Navbar>
             <h2 className="ps-4 pt-1"> Reports</h2>
-            <div className="m-4" style={{borderRadius:"12px" , boxShadow:"0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)"}}>
+            <div className="m-4" style={{borderRadius:"12px" , overflow:"scroll", height:"600px", boxShadow:"0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)"}}>
                 <ul className="nav nav-tabs p-3">
                     <li className="nav-item">
                         <p className="nav-link" onClick={() => navigate('/Report')}>All Task</p>
