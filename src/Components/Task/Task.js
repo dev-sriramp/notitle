@@ -66,6 +66,7 @@ const Task = (props) => {
           id: "#" + counter,
           actualCount: "",
           actualTime: "",
+          status:"Pending",
         });
         toast.success('Task Assigned successfully');
       }
@@ -97,6 +98,7 @@ const Task = (props) => {
           id: "#" + counter,
           actualCount: "",
           actualTime: "",
+          status:"Pending",
         });
         toast.success('Task Assigned successfully');
       }
