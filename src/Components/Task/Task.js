@@ -242,7 +242,7 @@ const Task = (props) => {
                 <div className="button-section">
                   <center>
                     <button className="btn btn-outline-secondary" type="button" onClick={() => addFormFields()}>+ Add field</button>
-                    <div className=" mt-3" ><button className="btn btn-primary" style={{ width: "22rem" }} type="submit">Publish</button>
+                    <div className=" mt-3" ><button className="btn btn-warning" style={{ width: "22rem" }} type="submit">Publish</button>
                     </div></center></div></form>
             </div >
           </div>

@@ -64,7 +64,7 @@ const LogIn = () => {
                 }
               }} /> Show Password</div>
             <div className="mb-4 d-grid gap-2">
-              <button className="btn btn-primary" title="Log in" type="submit">Log in</button>
+              <button className="btn btn-warning" title="Log in" type="submit">Log in</button>
             </div>
           </div>
         </div></div></form>
