@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ReactComponent as Settingssvg } from '../../assets/settings.svg';
+import Settings from '../../assets/settings.png';
 
 const Navbar = (props) => {
     return (
         <div>
             <div className="topnav mb-3">
-                <nav className="navbar navbar">
+                <nav className="navbar navbar-dark bg-dark">
                     <div className="ms-5 ">
                         <img src="https://www.vguard.in/waterpurifier/assets/images/logo.png" alt="" width="75" height="30"></img>
                     </div>
@@ -20,7 +20,7 @@ const Navbar = (props) => {
                                  Assign Task</button></Link>
                             <Link to="/Report"><button className={props.report} >
                                  ViewReports</button></Link>
-                        <Link to="/Settings"><button className={props.settings}><Settingssvg></Settingssvg> </button></Link>
+                        <Link to="/Settings"><button className={props.settings}><img style={{hight:"30x" ,width:"30px"}} src={Settings}></img> </button></Link>
 
                     </div>
 

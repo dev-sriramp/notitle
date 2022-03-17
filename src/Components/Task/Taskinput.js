@@ -37,7 +37,7 @@ const Taskinput = (props) => {
           <td>   {
             props.index ?
               <button type="button" className="btn btn-white" onClick={() => props.removeFormFields(props.index)}>  <Deletesvg /></button>
-              : <button type="button" className="btn btn-white" disabled> <Deletesvg /></button>
+              : <button type="button" className="btn btn-white" disabled> <Deletesvg  /></button>
           }
           </td>
         </tr>

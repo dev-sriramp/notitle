@@ -86,18 +86,18 @@ setInfo(res);
 
     return(
         <div>
-             <Navbar home={"btn btn-light me-3"} report={"btn btn-light me-3"} settings={"btn btn-primary me-3"} ></Navbar>
-            <h2 className="p-3">Settings</h2>
-            <div className="continer" style={{margin: "0 auto"}}>
-            <div class="row p-3">
+             <Navbar home={"btn btn-black text-white me-3"} report={"btn btn-black text-white me-3"} settings={"btn btn-warning me-3"} ></Navbar>
+            <h2 className="ps-4 pt-1"> Settings</h2>
+            <div className="continer m-4" style={{ borderRadius: "12px", overflow: "scroll", height: "600px", boxShadow: "0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)" }}>
+            <div class="row p-3 mt-5">
                 <div class="col-md-4">
                 <div className="card mb-3  ">
                 <div className="card-body">
                 <h6 className="mb-3">
                  {WORK_STATION} Settings</h6>
                     <div className="d-grid gap-2 mb-3">
-                    <button className="btn btn-outline-primary" type="button"  data-bs-toggle="modal" data-bs-target="#Workstationwindow">Add {WORK_STATION}</button>
-                        <button className="btn btn-primary" type="button"  data-bs-toggle="modal" data-bs-target="#" >Edit {WORK_STATION}</button>
+                    <button className="btn btn-outline-warning" type="button"  data-bs-toggle="modal" data-bs-target="#Workstationwindow">Add {WORK_STATION}</button>
+                        <button className="btn btn-secondary" type="button"  data-bs-toggle="modal" data-bs-target="#" >Edit {WORK_STATION}</button>
                     </div>
                     <div className="modal fade" id="Workstationwindow" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -112,8 +112,8 @@ setInfo(res);
                             </div>
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="button" className="btn btn-primary" onClick={appendChildData} data-bs-dismiss="modal">Add</button>
+                            <button type="button" className="btn btn-outline-warning" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" className="btn btn-warning" onClick={appendChildData} data-bs-dismiss="modal">Add</button>
                         </div>
                         </div>
                     </div>
@@ -126,8 +126,8 @@ setInfo(res);
                 <div className="card-body">
                 <h6 className="mb-3">  {WORK_STATION_MODEL} Settings</h6>
                     <div className="d-grid gap-2 mb-3">
-                    <button className="btn btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#Modelwindow">Add {WORK_STATION_MODEL} </button>
-                        <button className="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#" >Edit {WORK_STATION_MODEL}l </button>
+                    <button className="btn btn-outline-warning" type="button" data-bs-toggle="modal" data-bs-target="#Modelwindow">Add {WORK_STATION_MODEL} </button>
+                        <button className="btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#" >Edit {WORK_STATION_MODEL}l </button>
                     </div>
                     <div className="modal fade" id="Modelwindow" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -150,8 +150,8 @@ setInfo(res);
                             </div>
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="button" className="btn btn-primary" onClick={appendModel} data-bs-dismiss="modal">Add</button>
+                            <button type="button" className="btn btn-outline-warning" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" className="btn btn-warning" onClick={appendModel} data-bs-dismiss="modal">Add</button>
                         </div>
                         </div>
                     </div>
@@ -164,7 +164,7 @@ setInfo(res);
                 <div className="card-body">
                     <h6 className="mb-3"><Accountsvg></Accountsvg> Account Settings</h6>
                 <div className="d-grid mb-3 gap-2">
-                <button type="button"   className="btn btn-outline-secondary ">
+                <button type="button"   className="btn btn-outline-warning ">
                       Change Password 
                         </button>
                 <button type="button"   className="btn btn-secondary " data-bs-toggle="modal" data-bs-target="#staticBackdrop">
@@ -180,12 +180,12 @@ setInfo(res);
                                 <div className="row">
                                 <div className="col">
                             <div className="d-grid gap-2">
-                            <button className="btn btn-outline-secondary" onClick={logOut} data-bs-dismiss="modal" type="button">Yes</button>
+                            <button className="btn btn-outline-warning" onClick={logOut} data-bs-dismiss="modal" type="button">Yes</button>
                             </div>
                             </div>
                             <div className="col">
                             <div className="d-grid gap-2">
-                            <button className="btn btn-primary" data-bs-dismiss="modal" type="button">No</button>
+                            <button className="btn btn-warning" data-bs-dismiss="modal" type="button">No</button>
                             </div>
                             </div>
                                 </div>

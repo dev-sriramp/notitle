@@ -14,7 +14,9 @@ export const AuthProvider = ({ children }) => {
   }, []);
   if (loading) {
     return (
-      <Lode></Lode>
+      <center>
+        <Lode></Lode>
+      </center>
     );
   }
   return (<AuthContext.Provider value={{
