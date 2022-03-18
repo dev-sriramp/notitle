@@ -143,7 +143,7 @@ const Pending = () => {
                         <p className="nav-link text-dark" onClick={() => navigate('/Report')}>All Task</p>
                     </li>
                     <li className="nav-item">
-                        <p className="nav-link active bg-warning"> Pending</p>
+                        <p className="nav-link active bg-warning rounded"> Pending</p>
                     </li>
                     <li className="nav-item">
                         <p className="nav-link text-dark" onClick={() => navigate('/Completed')}> Completed</p>

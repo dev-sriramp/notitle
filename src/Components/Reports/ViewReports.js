@@ -146,7 +146,7 @@ const ViewReports = () => {
       <div className="m-4" style={{ borderRadius: "12px", overflow: "scroll", height: "600px", boxShadow: "0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)" }}>
         <ul className="nav nav-tabs p-3">
           <li className="nav-item">
-            <p className="nav-link active bg-warning">All Task</p>
+            <p className="nav-link active bg-warning rounded">All Task</p>
           </li>
           <li className="nav-item">
             <p className="nav-link text-dark" onClick={() => navigate('/Pending')}> Pending</p>
