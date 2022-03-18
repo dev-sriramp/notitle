@@ -153,7 +153,7 @@ const Completed = () => {
                         <p className="nav-link text-dark" onClick={() => navigate('/Pending')}> Pending</p>
                     </li>
                     <li className="nav-item">
-                        <p className="nav-link active bg-warning  "> Completed</p>
+                        <p className="nav-link active bg-warning rounded "> Completed</p>
                     </li>
                     <li className="nav-item">
                         <p className="btn btn-white " onClick={() => { Reset() }}> <Resetsvg></Resetsvg> Reset</p>

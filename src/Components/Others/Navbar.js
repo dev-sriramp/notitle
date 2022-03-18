@@ -19,8 +19,8 @@ const Navbar = (props) => {
                     <Link to="/Assigntask"><button className={props.home} >
                                  Assign Task</button></Link>
                             <Link to="/Report"><button className={props.report} >
-                                 ViewReports</button></Link>
-                        <Link to="/Settings"><button className={props.settings}><img style={{hight:"30x" ,width:"30px"}} src={Settings}></img> </button></Link>
+                                 View Reports</button></Link>
+                        <Link to="/Settings"><button className={props.settings}><img style={{hight:"25x" ,width:"25px"}} src={Settings}></img> </button></Link>
 
                     </div>
 

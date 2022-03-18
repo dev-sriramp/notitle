@@ -97,7 +97,7 @@ setInfo(res);
                  {WORK_STATION} Settings</h6>
                     <div className="d-grid gap-2 mb-3">
                     <button className="btn btn-outline-warning" type="button"  data-bs-toggle="modal" data-bs-target="#Workstationwindow">Add {WORK_STATION}</button>
-                        <button className="btn btn-secondary" type="button"  data-bs-toggle="modal" data-bs-target="#" >Edit {WORK_STATION}</button>
+                        <button className="btn btn-dark" type="button"  data-bs-toggle="modal" data-bs-target="#" >Edit {WORK_STATION}</button>
                     </div>
                     <div className="modal fade" id="Workstationwindow" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -127,7 +127,7 @@ setInfo(res);
                 <h6 className="mb-3">  {WORK_STATION_MODEL} Settings</h6>
                     <div className="d-grid gap-2 mb-3">
                     <button className="btn btn-outline-warning" type="button" data-bs-toggle="modal" data-bs-target="#Modelwindow">Add {WORK_STATION_MODEL} </button>
-                        <button className="btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#" >Edit {WORK_STATION_MODEL}l </button>
+                        <button className="btn btn-dark" type="button" data-bs-toggle="modal" data-bs-target="#" >Edit {WORK_STATION_MODEL}l </button>
                     </div>
                     <div className="modal fade" id="Modelwindow" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -167,7 +167,7 @@ setInfo(res);
                 <button type="button"   className="btn btn-outline-warning ">
                       Change Password 
                         </button>
-                <button type="button"   className="btn btn-secondary " data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                <button type="button"   className="btn btn-dark " data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                       Logout
                         </button>
                         <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
