@@ -164,19 +164,19 @@ const Pending = () => {
                             <table className="table ">
                                 <thead className="table">
                                     <tr>
-                                        <th scope="col">
-                                            <input type="number" placeholder="id" className="form-control"></input>
+                                        <th scope="col" style={{width:"110px"}}>
+                                            <input style={{width:"110px"}} type="number" placeholder="id" className="form-control"></input>
                                         </th>
-                                        <th scope="col">
-                                            <input type="date" value={DateInfo} onChange={e => DateSort(e)} className="form-control"></input>
+                                        <th scope="col" style={{width:"150px"}}>
+                                            <input style={{width:"150px"}} type="date" value={DateInfo} onChange={e => DateSort(e)} className="form-control"></input>
                                         </th>
-                                        <th scope="col">
-                                            <select className="form-select" value={WorkStationInfo} onChange={(e) => WorkStationSort(e)} aria-label="Default select example">
+                                        <th scope="col" style={{width:"160px"}}>
+                                            <select style={{width:"160px"}} className="form-select" value={WorkStationInfo} onChange={(e) => WorkStationSort(e)} aria-label="Default select example">
                                                 <option value="">All WorkStation</option>
                                                 {workStation.map((data) => (<option key={data} value={data}>{data}</option>))}
                                             </select></th>
-                                        <th scope="col">
-                                            <select className="form-select" value={WorkStationModelInfo} onChange={(e) => WorkStationModelSort(e)} aria-label="Default select example">
+                                        <th scope="col" style={{width:"130px"}}>
+                                            <select style={{width:"130px"}} className="form-select" value={WorkStationModelInfo} onChange={(e) => WorkStationModelSort(e)} aria-label="Default select example">
                                                 <option value="">All Model</option>
                                                 <option value="small">small</option>
                                                 <option value="medium">medium</option>
