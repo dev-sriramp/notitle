@@ -170,19 +170,19 @@ const ViewReports = () => {
               <table className="table ">
                 <thead className="table">
                   <tr>
-                    <th scope="col">
-                      <input type="number" placeholder="id" className="form-control"></input>
+                    <th scope="col"style={{width:"110px"}} >
+                      <input type="number" style={{width:"110px"}} placeholder="id" className="form-control"></input>
                     </th>
-                    <th scope="col">
-                      <input type="date" placeholder="Date" value={DateInfo} onChange={e => DateSort(e)} className="form-control"></input>
+                    <th scope="col" style={{width:"150px"}} >
+                      <input type="date" style={{width:"150px"}}  placeholder="Date" value={DateInfo} onChange={e => DateSort(e)} className="form-control"></input>
                     </th>
-                    <th scope="col">
-                      <select className="form-select" value={WorkStationInfo} onChange={(e) => WorkStationSort(e)} aria-label="Default select example">
+                    <th scope="col" style={{width:"160px"}}>
+                      <select style={{width:"160px"}} className="form-select" value={WorkStationInfo} onChange={(e) => WorkStationSort(e)} aria-label="Default select example">
                         <option value="" >All WorkStation</option>
                         {workStation.map((data) => (<option key={data} value={data}>{data}</option>))}
                       </select></th>
-                    <th scope="col">
-                      <select className="form-select" value={WorkStationModelInfo} onChange={(e) => WorkStationModelSort(e)} aria-label="Default select example">
+                    <th scope="col" style={{width:"130px"}}> 
+                      <select style={{width:"130px"}} className="form-select" value={WorkStationModelInfo} onChange={(e) => WorkStationModelSort(e)} aria-label="Default select example">
                         <option value="" >All Model</option>
                         <option value="small">small</option>
                         <option value="medium">medium</option>
@@ -190,11 +190,11 @@ const ViewReports = () => {
                         <option value="verylarge">verylarge</option>
                       </select>
                     </th>
-                    <th scope="col">{TOTAL_COUNT}</th>
-                    <th scope="col">{TOTAL_TIME}</th>
-                    <th scope="col">{ACTUAL_COUNT}</th>
-                    <th scope="col">{ACTUAL_TIME}</th>
-                    <th scope="col">Status</th>
+                    <th scope="col" style={{width:"200px"}}>{TOTAL_COUNT}</th>
+                    <th scope="col" style={{width:"200px"}}>{TOTAL_TIME}</th>
+                    <th scope="col" style={{width:"200px"}}>{ACTUAL_COUNT}</th>
+                    <th scope="col" style={{width:"200px"}}>{ACTUAL_TIME}</th>
+                    <th scope="col" style={{width:"200px"}}>Status</th>
 
                   </tr>
                 </thead>
