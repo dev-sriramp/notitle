@@ -6,7 +6,7 @@ import { db } from "../../config";
 import { query, orderBy, getDocs, collection, } from "firebase/firestore";
 import { ReactComponent as Downloadsvg } from '../../assets/download.svg';
 import { ReactComponent as Resetsvg } from '../../assets/restart.svg';
-import exportFromJSON from 'export-from-json'
+import * as XLSX from 'xlsx';
 import { ACTUAL_COUNT, ACTUAL_TIME, TOTAL_COUNT, TOTAL_TIME } from "../../constants/constants";
 import { useNavigate } from 'react-router-dom';
 import Loading from "../Others/loading";
@@ -65,9 +65,11 @@ const ViewReports = () => {
     let today = new Date();
     let counter = today.getTime() + "" + today.getDate() + "" + (today.getMonth() + 1) + "" + today.getFullYear();
     const data = info1;
-    const fileName = counter;
-    const exportType = 'xls'
-    exportFromJSON({ data, fileName, exportType })
+    const fileName = counter + ".xlsx";
+    var worksheet = XLSX.utils.json_to_sheet(data);
+    var new_workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(new_workbook, worksheet, fileName);
+    XLSX.writeFileXLSX(new_workbook, fileName);
   }
 
   function Datarender(props) {
@@ -165,24 +167,24 @@ const ViewReports = () => {
           <div className=" border border-white table-responsive border p-3" >
             {loading ?
               <center>
-              <Loading></Loading>
+                <Loading></Loading>
               </center> :
               <table className="table ">
                 <thead className="table">
                   <tr>
-                    <th scope="col"style={{width:"110px"}} >
-                      <input type="number" style={{width:"110px"}} placeholder="id" className="form-control"></input>
+                    <th scope="col" style={{ width: "110px" }} >
+                      <input type="number" style={{ width: "110px" }} placeholder="id" className="form-control"></input>
                     </th>
-                    <th scope="col" style={{width:"150px"}} >
-                      <input type="date" style={{width:"150px"}}  placeholder="Date" value={DateInfo} onChange={e => DateSort(e)} className="form-control"></input>
+                    <th scope="col" style={{ width: "150px" }} >
+                      <input type="date" style={{ width: "150px" }} placeholder="Date" value={DateInfo} onChange={e => DateSort(e)} className="form-control"></input>
                     </th>
-                    <th scope="col" style={{width:"160px"}}>
-                      <select style={{width:"160px"}} className="form-select" value={WorkStationInfo} onChange={(e) => WorkStationSort(e)} aria-label="Default select example">
+                    <th scope="col" style={{ width: "160px" }}>
+                      <select style={{ width: "160px" }} className="form-select" value={WorkStationInfo} onChange={(e) => WorkStationSort(e)} aria-label="Default select example">
                         <option value="" >All WorkStation</option>
                         {workStation.map((data) => (<option key={data} value={data}>{data}</option>))}
                       </select></th>
-                    <th scope="col" style={{width:"130px"}}> 
-                      <select style={{width:"130px"}} className="form-select" value={WorkStationModelInfo} onChange={(e) => WorkStationModelSort(e)} aria-label="Default select example">
+                    <th scope="col" style={{ width: "130px" }}>
+                      <select style={{ width: "130px" }} className="form-select" value={WorkStationModelInfo} onChange={(e) => WorkStationModelSort(e)} aria-label="Default select example">
                         <option value="" >All Model</option>
                         <option value="small">small</option>
                         <option value="medium">medium</option>
@@ -190,11 +192,11 @@ const ViewReports = () => {
                         <option value="verylarge">verylarge</option>
                       </select>
                     </th>
-                    <th scope="col" style={{width:"200px"}}>{TOTAL_COUNT}</th>
-                    <th scope="col" style={{width:"200px"}}>{TOTAL_TIME}</th>
-                    <th scope="col" style={{width:"200px"}}>{ACTUAL_COUNT}</th>
-                    <th scope="col" style={{width:"200px"}}>{ACTUAL_TIME}</th>
-                    <th scope="col" style={{width:"200px"}}>Status</th>
+                    <th scope="col" style={{ width: "200px" }}>{TOTAL_COUNT}</th>
+                    <th scope="col" style={{ width: "200px" }}>{TOTAL_TIME}</th>
+                    <th scope="col" style={{ width: "200px" }}>{ACTUAL_COUNT}</th>
+                    <th scope="col" style={{ width: "200px" }}>{ACTUAL_TIME}</th>
+                    <th scope="col" style={{ width: "200px" }}>Status</th>
 
                   </tr>
                 </thead>

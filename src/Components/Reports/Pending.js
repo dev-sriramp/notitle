@@ -6,7 +6,7 @@ import { db } from "../../config";
 import { query, orderBy, getDocs, collection, } from "firebase/firestore";
 import { ReactComponent as Downloadsvg } from '../../assets/download.svg';
 import { ReactComponent as Resetsvg } from '../../assets/restart.svg';
-import exportFromJSON from 'export-from-json'
+import * as XLSX from 'xlsx';
 import { TOTAL_COUNT, TOTAL_TIME } from "../../constants/constants";
 import { useNavigate } from 'react-router-dom';
 import Loading from "../Others/loading";
@@ -65,9 +65,11 @@ const Pending = () => {
         let today = new Date();
         let counter = today.getTime() + "" + today.getDate() + "" + (today.getMonth() + 1) + "" + today.getFullYear();
         const data = info1;
-        const fileName = counter;
-        const exportType = 'xls'
-        exportFromJSON({ data, fileName, exportType })
+        const fileName = counter+".xlsx";
+        var worksheet = XLSX.utils.json_to_sheet(data);
+        var new_workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(new_workbook, worksheet, fileName);
+        XLSX.writeFileXLSX(new_workbook, fileName);
     }
 
     function Datarender(props) {
