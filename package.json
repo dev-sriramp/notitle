@@ -16,7 +16,7 @@
         "react-shimmer-effects": "^1.0.2",
         "react-toastify": "^8.1.0",
         "reactjs-popup": "^2.0.5",
-        "xlsx": "^0.18.3"
+        "xlsx": "^0.18.4"
     },
     "scripts": {
         "start": "react-scripts start",
