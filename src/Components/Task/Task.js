@@ -86,7 +86,7 @@ const Task = (props) => {
     for (let i = 0; i < len; i++) {
       console.log(excelData[i]);
       let today = new Date();
-      let counter = today.getTime() + "" + today.getDate() + "" + (today.getMonth() + 1) + "" + today.getFullYear();
+      let counter = (today.getTime()+"").slice(3);
       try {
         await setDoc(doc(db, excelData[i].date, "#" + counter), {
           date: excelData[i].date,

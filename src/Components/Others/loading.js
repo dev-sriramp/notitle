@@ -1,23 +1,13 @@
 import React from "react";
-import Lottie from 'react-lottie';
-import animationData from '../../assets/loading.json';
+
+
 function loading() {
-    const defaultOptions = {
-        loop: true,
-        autoplay: true,
-        animationData: animationData,
-        rendererSettings: {
-            preserveAspectRatio: "xMidYMid slice"
-        }
-    };
     return (
-        <><div className="continer-sm " style={{ width: "23rem" }}>
-            <Lottie
-                options={defaultOptions}
-                height={300}
-                width={300}
-            />
-        </div></>
+        <><div class="d-flex mt-5 justify-content-center">
+        <div class="spinner-border mt-5" role="status">
+          <span class="visually-hidden mt-5">Loading...</span>
+        </div>
+      </div></>
     )
 }
 export default loading;
